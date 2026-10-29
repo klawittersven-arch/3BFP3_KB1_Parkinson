@@ -1,26 +1,26 @@
-# KB I – Parkinson · digitale Übungen zu den Klausurtrainings (3BFP3)
+# KB I – Parkinson · digitale Übungen zu AB 1 und AB 2 (3BFP3)
 
-Kleine Web-App zu den zwei Parkinson-Arbeitsblättern im Fach KB I (generalistische Pflegeausbildung,
+Kleine Web-App zu den zwei abschließenden Parkinson-Arbeitsblättern im Fach KB I (generalistische Pflegeausbildung,
 3. Ausbildungsjahr, Themenblock I). Die Schülerinnen und Schüler scannen den QR-Code auf dem Arbeitsblatt,
-bearbeiten am Smartphone eine Zuordnungsübung und erhalten sofort Rückmeldung. Sind alle Karten richtig
-gelöst, erscheint ein **Merksatz**, den sie auf das Arbeitsblatt abschreiben – so ist das Wesentliche auf
-Papier gesichert und die SuS lernen mit dem Arbeitsblatt für Klausur und Examen.
+bearbeiten am Smartphone eine Zuordnungsübung und erhalten sofort Rückmeldung. Die Übungen sparen Schreibzeit:
+Übung 1 bereitet jeweils die nächste schriftliche Aufgabe vor, die zweite Übung ist „für die Schnellen“.
+Sind alle Karten richtig gelöst, erscheint eine kurze Zusammenfassung.
 
 Übersicht: https://klawittersven-arch.github.io/3BFP3_KB1_Parkinson/
 
 | Arbeitsblatt | Übung | Adresse (QR-Code in `qr/`) |
 |---|---|---|
-| Klausurtraining 1 – Krankheitsbild und Pflegeprobleme (Di 03.11.) | Übung 1: Fachlich richtig oder falsch? | `…/ab1a.html` |
-| | Übung 2: PESR-Bausteine erkennen | `…/ab1b.html` |
-| Klausurtraining 2 – Pflege planen und im Notfall handeln (Di 10.11.) | Übung 1: Fachgerecht gepflegt? | `…/ab2a.html` |
-| | Übung 2: Akinetische Krise – was tun? (sofort / nach Anordnung / nicht tun) | `…/ab2b.html` |
+| AB 1 – Pflegeprobleme und Pflegeziele (Di 03.11.) | Übung 1: Sturzgefahr – ein Risiko-Pflegeproblem (P / RF / R / anderes Problem) | `…/ab1a.html` |
+| | Für die Schnellen: Ist das Pflegeziel überprüfbar? | `…/ab1b.html` |
+| AB 2 – Notfall akinetische Krise (Di 10.11.) | Übung 1: Akinetische Krise – was tun? (sofort / nach Anordnung / nicht tun) | `…/ab2a.html` |
+| | Für die Schnellen: Komplikationen vorbeugen | `…/ab2b.html` |
 
 ## So funktioniert eine Übung
 
 - Karten mit Aussagen, darunter die Antwortknöpfe. **Richtig:** grün mit ✓ und Erklärung.
   **Falsch:** orange mit ✗ und Tipp – die Lösung wird nie verraten, ein neuer Versuch ist möglich.
 - Fortschrittsanzeige oben („3 von 10 richtig“).
-- Erst wenn alle Karten gelöst sind, erscheint der Merksatz. Wer einfach durchklickt (zu wenige Karten beim
+- Erst wenn alle Karten gelöst sind, erscheint die Zusammenfassung. Wer einfach durchklickt (zu wenige Karten beim
   ersten Versuch richtig, Wert `mindestens` je Übung), bekommt stattdessen „Hey, nicht einfach durchklicken!“.
 - „Noch einmal üben“ setzt die Übung zurück. Ein versehentliches Neuladen löscht nichts.
 - Die Übersichtsseite zeigt mit ✓, welche Übungen auf diesem Handy schon gelöst wurden.
@@ -36,8 +36,6 @@ Datei. Auf GitHub: Datei öffnen → Stift („Edit this file“) → ändern �
 die Änderung online.
 
 - Nur den Text zwischen den einfachen Hochkommas `' … '` ändern; `**fett**` funktioniert.
-- **Wichtig:** Die Merksätze stehen wortgleich in den Musterlösungen der Arbeitsblätter. Wer einen Merksatz
-  hier ändert, sollte ihn auch in der Musterlösung anpassen.
 
 ## QR-Codes
 
@@ -54,7 +52,7 @@ die Seiten erreichbar.
 ## Tests
 
 `node tests/uebungen.test.js` prüft alle Übungen in Handygröße (360 px) mit Playwright: Tipp nach falscher
-Antwort, Merksatz erst nach vollständiger Lösung, Erkennen von „Durchklicken“, Zurücksetzen, Speichern beim
+Antwort, Zusammenfassung erst nach vollständiger Lösung, Erkennen von „Durchklicken“, Zurücksetzen, Speichern beim
 Neuladen, kein waagerechtes Scrollen, keine Konsolenfehler und keine Anfragen an fremde Adressen.
 
 ## Dateien

@@ -58,6 +58,8 @@
   // Lange Beschriftungen: Knöpfe auf schmalen Handys untereinander statt nebeneinander
   var laengste = Math.max.apply(null, U.knoepfe.map(function (b) { return b.text.length; }));
   var lang = (U.knoepfe.length >= 3 && laengste > 6) || laengste > 16;
+  // Vier Knöpfe mit mittellangen Beschriftungen: auf dem Handy 2 × 2 statt untereinander
+  var zweiMalZwei = U.knoepfe.length === 4 && laengste <= 16;
 
   var kartenBox = document.getElementById('karten');
   var kartenEl = [];
@@ -72,7 +74,7 @@
     }).join('');
     el.innerHTML =
       '<p class="karte-text" id="k' + i + '-text"><span class="nummer">' + esc(k.nummer) + '</span>' + fmt(k.text) + '</p>' +
-      '<div class="knoepfe knoepfe-' + U.knoepfe.length + (lang ? ' knoepfe-lang' : '') + '" role="group" aria-label="Antwort zu Karte ' + esc(k.nummer) + '">' + knoepfe + '</div>' +
+      '<div class="knoepfe knoepfe-' + U.knoepfe.length + (zweiMalZwei ? ' knoepfe-2x2' : (lang ? ' knoepfe-lang' : '')) + '" role="group" aria-label="Antwort zu Karte ' + esc(k.nummer) + '">' + knoepfe + '</div>' +
       '<div class="rueckmeldung" role="status" aria-live="polite"></div>';
     kartenBox.appendChild(el);
     kartenEl.push(el);

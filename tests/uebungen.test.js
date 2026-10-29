@@ -62,7 +62,7 @@ function server() {
     }
     const bereich = page.locator('#merksatz-bereich');
     pruefe(await bereich.isVisible(), `${id}: Merksatz-Bereich sichtbar`);
-    pruefe((await bereich.innerText()).includes('Ihr Merksatz'), `${id}: Merksatz erscheint (bei 1 Fehler)`);
+    pruefe((await bereich.innerText()).includes('Das Wichtigste in Kürze'), `${id}: Zusammenfassung erscheint (bei 1 Fehler)`);
 
     // 3) Reload behält den Stand
     await page.reload();

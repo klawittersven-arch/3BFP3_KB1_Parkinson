@@ -71,6 +71,7 @@ a { color: var(--petrol); }
 .knoepfe-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
 @media (max-width: 560px) {
   .knoepfe-lang { grid-template-columns: 1fr; }
+  .knoepfe-2x2 { grid-template-columns: 1fr 1fr; }
 }
 .antwort {
   min-height: 52px; padding: 8px 6px;

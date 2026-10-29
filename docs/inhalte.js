@@ -1,5 +1,5 @@
 /* ==========================================================================
-   INHALTE – KB I · Parkinson (3BFP3, Themenblock I) – Klausurtraining 1 und 2
+   INHALTE – KB I · Parkinson (3BFP3, Themenblock I) – AB 1 und AB 2
    ==========================================================================
 
    In dieser Datei stehen ALLE Texte der vier Übungen.
@@ -24,10 +24,8 @@
      mindestens  – so viele Karten müssen beim ERSTEN Versuch richtig sein,
                    sonst gibt es statt des Merksatzes „Nicht einfach durchklicken!“
      karten      – die Aussagen (siehe unten)
-     merksatz    – erscheint erst, wenn alle Karten richtig gelöst sind.
-                   WICHTIG: Der Merksatz steht wortgleich in der Musterlösung
-                   des Arbeitsblatts. Wenn Sie ihn hier ändern, ändern Sie ihn
-                   bitte auch dort.
+     merksatz    – erscheint erst, wenn alle Karten richtig gelöst sind
+                   (kurze Zusammenfassung „Das Wichtigste in Kürze“).
 
    Aufbau einer Karte:
      nummer      – die Nummer auf der Karte
@@ -46,8 +44,8 @@ var INHALTE = {
      ------------------------------------------------------------------------ */
   allgemein: {
     kopfzeile: 'KB I – Parkinson',
-    merksatzUeberschrift: 'Ihr Merksatz',
-    merksatzHinweis: 'Schreiben Sie den Merksatz auf Ihr Arbeitsblatt.',
+    merksatzUeberschrift: 'Das Wichtigste in Kürze',
+    merksatzHinweis: 'Nutzen Sie das für die nächste Aufgabe auf Ihrem Arbeitsblatt.',
     // {x} und {y} werden automatisch durch Zahlen ersetzt.
     fortschritt: '{x} von {y} richtig',
     ersterVersuch: 'Beim ersten Versuch richtig: {x} von {y}',
@@ -57,236 +55,172 @@ var INHALTE = {
     tippVorwort: 'Tipp:',
     // {x} = beim ersten Versuch richtig, {y} = Anzahl Karten, {z} = nötige Mindestzahl
     durchklickenTitel: 'Hey, nicht einfach durchklicken!',
-    durchklickenText: 'Beim ersten Versuch richtig: {x} von {y} – nötig sind mindestens {z}. Lesen Sie jede Karte genau und überlegen Sie, bevor Sie antworten. Dann erhalten Sie auch Ihren Merksatz.',
+    durchklickenText: 'Beim ersten Versuch richtig: {x} von {y} – nötig sind mindestens {z}. Lesen Sie jede Karte genau und überlegen Sie, bevor Sie antworten. Dann erhalten Sie auch die Zusammenfassung.',
     durchklickenKnopf: 'Übung neu starten',
     zurUebersicht: 'Zur Übersicht',
-    naechsteUebung: 'Weiter zu Übung 2',
+    naechsteUebung: 'Weiter: Übung für die Schnellen',
     fertigAlle: 'Beide Übungen dieses Arbeitsblatts sind gelöst. 👍'
   },
 
   /* ========================================================================
-     KLAUSURTRAINING 1 – Krankheitsbild und Pflegeprobleme (Di 03.11.)
+     AB 1 – Pflegeprobleme und Pflegeziele prüfungsreif formulieren (Di 03.11.)
      ======================================================================== */
 
   ab1a: {
-    ab: 'Klausurtraining 1',
-    titel: 'Übung 1: Fachlich richtig oder falsch?',
-    anweisung: 'Jonas (3. Ausbildungsjahr) hat in einer Probeklausur das Krankheitsbild Parkinson erläutert. Prüfen Sie seine Sätze: **R** = fachlich richtig, **F** = fachlich falsch.',
+    ab: 'AB 1',
+    titel: 'Übung 1: Sturzgefahr – ein Risiko-Pflegeproblem',
+    anweisung: 'Die Informationen stammen aus dem Fall von Herrn Lenz. Ordnen Sie zu: **P** = Pflegeproblem · **RF** = Risikofaktor · **R** = Ressource · **anderes Problem** = gehört zu einem anderen Pflegeproblem.',
     knoepfe: [
-      { kuerzel: 'R', text: 'R – richtig' },
-      { kuerzel: 'F', text: 'F – falsch' }
+      { kuerzel: 'P', text: 'P' },
+      { kuerzel: 'RF', text: 'RF' },
+      { kuerzel: 'R', text: 'R' },
+      { kuerzel: 'X', text: 'anderes Problem' }
     ],
+    hilfe: {
+      titel: 'Hilfe: aktuell oder Risiko?',
+      punkte: [
+        '**Aktuelles Pflegeproblem:** Das Problem besteht schon → P + E (Ursachen) + S (Symptome) + R.',
+        '**Risiko-Pflegeproblem:** Das Problem droht erst → P + **RF** (Risikofaktoren) + R.',
+        'Risikofaktoren liegen in der Person (z. B. Gangstörung) oder in der Umgebung (z. B. Stolperfallen).'
+      ]
+    },
     mindestens: 7,
     karten: [
       { nummer: 1,
-        text: 'Parkinson ist eine langsam fortschreitende Erkrankung des Nervensystems. Dabei gehen Nervenzellen in der Substantia nigra im Mittelhirn zugrunde.',
-        richtig: 'R',
-        erklaerung: 'Genau: Parkinson ist eine chronisch fortschreitende (neurodegenerative) Erkrankung. Betroffen ist vor allem die Substantia nigra im Mittelhirn.',
-        tipp: 'Erinnern Sie sich an Ihr Arbeitsblatt „Warum entstehen die Symptome?“: Wo liegt die Substantia nigra?' },
+        text: 'Sturzgefahr',
+        richtig: 'P',
+        erklaerung: 'Der Titel des Risiko-Pflegeproblems: Ein (erneuter) Sturz droht. Alle anderen passenden Karten begründen oder entschärfen diese Gefahr.',
+        tipp: 'Welche Karte könnte als Überschrift über den anderen stehen?' },
       { nummer: 2,
-        text: 'Die Nervenzellen der Substantia nigra bilden Acetylcholin. Bei Parkinson entsteht deshalb ein Acetylcholinmangel.',
-        richtig: 'F',
-        erklaerung: 'Richtig erkannt – der Satz ist falsch: Die Zellen bilden **Dopamin**. Es entsteht ein Dopaminmangel; Acetylcholin überwiegt dadurch nur relativ (Ungleichgewicht).',
-        tipp: 'Welcher Botenstoff wird in der Substantia nigra gebildet?' },
+        text: 'Bleibt an der Türschwelle zum Bad oft wie festgeklebt stehen.',
+        richtig: 'RF',
+        erklaerung: 'Risikofaktor Freezing: Der Oberkörper will weiter, die Füße bleiben stehen – so kommt es leicht zum Sturz.',
+        tipp: 'Macht das einen Sturz wahrscheinlicher?' },
       { nummer: 3,
-        text: 'Die ersten Bewegungsstörungen zeigen sich, sobald die ersten Nervenzellen untergehen.',
-        richtig: 'F',
-        erklaerung: 'Richtig erkannt – der Satz ist falsch: Bewegungsstörungen fallen erst auf, wenn bereits **mehr als die Hälfte** der dopaminbildenden Zellen untergegangen ist (je nach Quelle 50–80 %). Deshalb wird Parkinson oft spät erkannt.',
-        tipp: 'Kann das Gehirn einen Verlust von Nervenzellen eine Zeit lang ausgleichen?' },
+        text: 'Macht kleine, schlurfende Schritte.',
+        richtig: 'RF',
+        erklaerung: 'Risikofaktor Gangstörung: Wer die Füße kaum hebt, bleibt leicht an Kanten und Teppichen hängen.',
+        tipp: 'Was passiert mit schlurfenden Füßen an einer Teppichkante?' },
       { nummer: 4,
-        text: 'Beim idiopathischen Parkinson-Syndrom ist die Ursache für den Untergang der Nervenzellen unbekannt.',
-        richtig: 'R',
-        erklaerung: '„Idiopathisch“ heißt: ohne bekannte Ursache. Das idiopathische Parkinson-Syndrom ist mit etwa 75 % die häufigste Form.',
-        tipp: 'Denken Sie an die Begriffshilfe zu „idiopathisch“.' },
+        text: 'Ist vor zwei Wochen beim Umdrehen in der Küche gestürzt.',
+        richtig: 'RF',
+        erklaerung: 'Ein Sturz in der Vorgeschichte ist einer der stärksten Risikofaktoren für weitere Stürze. Beim Risiko-Pflegeproblem gehört er deshalb zu den Risikofaktoren.',
+        tipp: 'Wer schon einmal gestürzt ist – wie hoch ist dann das Risiko für den nächsten Sturz?' },
       { nummer: 5,
-        text: 'Der typische Parkinson-Tremor ist ein Ruhezittern: Er tritt auf, wenn die Hand entspannt aufliegt, und wird bei gezielten Bewegungen meist schwächer.',
-        richtig: 'R',
-        erklaerung: 'Richtig: **Ruhetremor**, oft zuerst auf einer Körperseite; bei Aufregung wird er stärker.',
-        tipp: 'Wann zittert die Hand von Herrn Lenz – auf der Armlehne oder beim Greifen nach der Tasse?' },
+        text: 'Muss nachts zwei- bis dreimal zur Toilette.',
+        richtig: 'RF',
+        erklaerung: 'Risikofaktor: Nachts kommen Müdigkeit, Dunkelheit und Eile zusammen – eine typische Sturzsituation.',
+        tipp: 'Denken Sie an den Weg zur Toilette um 3 Uhr nachts.' },
       { nummer: 6,
-        text: 'Rigor bedeutet, dass die Muskulatur schlaff ist und beim passiven Bewegen kaum Widerstand leistet.',
-        richtig: 'F',
-        erklaerung: 'Richtig erkannt – der Satz ist falsch: Rigor ist eine **Muskelsteifigkeit** (erhöhter Muskeltonus). Beim passiven Bewegen spürt man einen zähen, oft ruckartigen Widerstand (Zahnradphänomen).',
-        tipp: 'Übersetzen Sie „Rigor“.' },
+        text: 'Im Flur liegen lose Teppiche.',
+        richtig: 'RF',
+        erklaerung: 'Umgebungsbezogener Risikofaktor: eine Stolperfalle, die sich leicht beseitigen lässt.',
+        tipp: 'Liegt das Risiko nur in der Person – oder auch in der Wohnung?' },
       { nummer: 7,
-        text: 'Riechstörungen, Verstopfung und heftige Bewegungen im Traum können schon Jahre vor den ersten Bewegungsstörungen auftreten.',
+        text: 'Geht mit dem Rollator.',
         richtig: 'R',
-        erklaerung: 'Ja – das sind typische **Frühzeichen** (Prodromalsymptome). Heftige Bewegungen und Rufen im Traum heißen REM-Schlaf-Verhaltensstörung.',
-        tipp: 'Lesen Sie, was Frau Lenz über die Zeit vor zehn Jahren erzählt.' },
+        erklaerung: 'Ressource: Er hat ein Hilfsmittel und nutzt es.',
+        tipp: 'Hilft ihm das – oder gefährdet es ihn?' },
       { nummer: 8,
-        text: 'Die posturale Instabilität (gestörte Halte- und Stellreflexe) tritt meist erst im Verlauf auf und erhöht das Sturzrisiko stark.',
+        text: 'Kann über eine Markierung am Boden steigen und dabei mitzählen.',
         richtig: 'R',
-        erklaerung: 'Richtig – das **vierte Leitsymptom**: Betroffene können einen Gleichgewichtsverlust nicht schnell genug ausgleichen und stürzen leicht, oft nach hinten.',
-        tipp: 'Was passiert, wenn die Reflexe fehlen, die uns beim Umdrehen oder bei einem Stoß auffangen?' },
+        erklaerung: 'Ressource: Er kennt aus der Physiotherapie eine Strategie gegen Freezing. Daran knüpfen die Pflegeinterventionen an.',
+        tipp: 'Ist das eine Fähigkeit, die ihm hilft?' },
       { nummer: 9,
-        text: 'Wird Parkinson früh genug behandelt, kann die Erkrankung geheilt werden.',
-        richtig: 'F',
-        erklaerung: 'Richtig erkannt – der Satz ist falsch: Parkinson ist **nicht heilbar**. Die Therapie lindert die Symptome und erhält die Selbstständigkeit möglichst lange; der Zelluntergang schreitet weiter fort.',
-        tipp: 'Können untergegangene Nervenzellen ersetzt werden?' },
+        text: 'Ist geistig klar und will so viel wie möglich selbst machen.',
+        richtig: 'R',
+        erklaerung: 'Ressource: Verständnis und Motivation – er kann Anleitungen umsetzen und arbeitet mit.',
+        tipp: 'Was bringt Herr Lenz selbst mit?' },
       { nummer: 10,
-        text: 'Weil Herr Lenz kaum Mimik zeigt und langsam antwortet, ist er geistig nicht mehr leistungsfähig.',
-        richtig: 'F',
-        erklaerung: 'Richtig erkannt – der Satz ist falsch: Hypomimie (starres Gesicht) und Bradyphrenie (verlangsamtes Denken) bedeuten **keinen Verlust der Intelligenz**. Wer das verwechselt, kränkt Betroffene und spricht über ihren Kopf hinweg.',
-        tipp: 'Was steht im Fall über sein Denken? „Geistig ist er klar.“' }
+        text: 'Verschluckt sich häufig bei Suppe und Wasser.',
+        richtig: 'X',
+        erklaerung: 'Gehört zu einem anderen Pflegeproblem: beeinträchtigtes Schlucken (Aspirationsgefahr). Nur Informationen, die zum Problem passen, kommen in das PESR-Schema.',
+        tipp: 'Hat das etwas mit Stürzen zu tun?' }
     ],
-    merksatz: 'Parkinson ist eine fortschreitende neurodegenerative Erkrankung: In der Substantia nigra gehen dopaminbildende Nervenzellen zugrunde. Der Dopaminmangel stört die Bewegungssteuerung. Leitsymptome sind Bradykinese/Akinese, Rigor, Ruhetremor und – meist später – posturale Instabilität. Parkinson ist nicht heilbar; die Therapie lindert die Symptome.'
+    merksatz: 'Risiko-Pflegeproblem: Das Problem ist noch nicht eingetreten. Statt Ursachen und Symptomen nennen Sie die **Risikofaktoren** aus dem Fall – in der Person (Freezing, Gangstörung, frühere Stürze) und in der Umgebung (Stolperfallen, nächtliche Wege) – dazu die **Ressourcen**. Ein früherer Sturz ist einer der stärksten Risikofaktoren.'
   },
 
   ab1b: {
-    ab: 'Klausurtraining 1',
-    titel: 'Übung 2: PESR-Bausteine erkennen',
-    anweisung: 'Die Informationen gehören zu einem Pflegeproblem von Herrn Lenz. Ordnen Sie jede Information einem Baustein zu: **P** = Pflegeproblem · **E** = Einflussfaktor/Ursache · **S** = Symptom/Kennzeichen · **R** = Ressource.',
+    ab: 'AB 1',
+    titel: 'Für die Schnellen: Ist das Pflegeziel überprüfbar?',
+    anweisung: 'Prüfen Sie die Pflegeziele für Herrn Lenz: **Ü** = überprüfbar formuliert · **N** = nicht überprüfbar.',
     knoepfe: [
-      { kuerzel: 'P', text: 'P' },
-      { kuerzel: 'E', text: 'E' },
-      { kuerzel: 'S', text: 'S' },
-      { kuerzel: 'R', text: 'R' }
+      { kuerzel: 'Ü', text: 'Ü – überprüfbar' },
+      { kuerzel: 'N', text: 'N – nicht überprüfbar' }
     ],
     hilfe: {
-      titel: 'Hilfe: Das PESR-Schema',
+      titel: 'Hilfe: Checkliste Pflegeziel',
       punkte: [
-        '**P – Pflegeproblem:** kurzer, pflegefachlicher Titel (Was ist das Problem?).',
-        '**E – Einflussfaktoren/Ursachen:** Warum besteht das Problem? „… aufgrund von …“ – bei Parkinson oft die Leitsymptome oder Wirkungsschwankungen.',
-        '**S – Symptome/Kennzeichen:** Was beobachten Sie konkret? „… erkennbar an …“ (mit Zeilenangabe).',
-        '**R – Ressourcen:** Was kann der Mensch selbst? Was oder wer hilft (Motivation, Wissen, Hilfsmittel, Angehörige, Therapien)?'
-      ]
-    },
-    mindestens: 6,
-    karten: [
-      { nummer: 1,
-        text: 'Beeinträchtigte Gehfähigkeit',
-        richtig: 'P',
-        erklaerung: 'Das ist der Problemtitel – kurz und pflegefachlich. Alle anderen Karten erklären, belegen oder entschärfen dieses Problem.',
-        tipp: 'Welche Karte könnte als Überschrift über allen anderen stehen?' },
-      { nummer: 2,
-        text: 'Bradykinese und Rigor',
-        richtig: 'E',
-        erklaerung: 'Einflussfaktoren: Die verlangsamten Bewegungen und die Muskelsteifigkeit sind die Ursache der Gehstörung.',
-        tipp: 'Ist das eine konkrete Beobachtung – oder die Erklärung dafür?' },
-      { nummer: 3,
-        text: 'Bleibt an der Schlafzimmertür wie festgeklebt stehen (Freezing).',
-        richtig: 'S',
-        erklaerung: 'Symptom: eine konkrete Beobachtung, an der Sie das Problem erkennen.',
-        tipp: 'Können Sie das sehen?' },
-      { nummer: 4,
-        text: 'Geht mit kleinen, schlurfenden Schritten.',
-        richtig: 'S',
-        erklaerung: 'Symptom: So zeigt sich die beeinträchtigte Gehfähigkeit.',
-        tipp: 'Ursache oder Beobachtung?' },
-      { nummer: 5,
-        text: 'Kurz vor der nächsten Tablette lässt die Wirkung seiner Parkinson-Medikamente nach.',
-        richtig: 'E',
-        erklaerung: 'Einflussfaktor: Wirkungsschwankung (Wearing-off) – in dieser Zeit verschlechtert sich die Gehfähigkeit.',
-        tipp: 'Erklärt diese Information, WARUM er gerade schlechter geht?' },
-      { nummer: 6,
-        text: 'Die Physiotherapeutin hat ihm gezeigt, über eine Markierung zu steigen und die Schritte mitzuzählen.',
-        richtig: 'R',
-        erklaerung: 'Ressource: Er kennt Strategien gegen das Freezing (äußere Reize). Daran knüpfen die Pflegemaßnahmen an.',
-        tipp: 'Hilft ihm das – oder schadet es?' },
-      { nummer: 7,
-        text: 'Gestörte Halte- und Stellreflexe (posturale Instabilität)',
-        richtig: 'E',
-        erklaerung: 'Einflussfaktor: Gleichgewichtsverluste kann er nicht mehr schnell ausgleichen.',
-        tipp: 'Ist das eine Beobachtung – oder ein Grund für das Problem?' },
-      { nummer: 8,
-        text: 'Möchte wieder selbstständig in seine Werkstatt gehen.',
-        richtig: 'R',
-        erklaerung: 'Ressource: Motivation ist eine wichtige Ressource für Training und Mitarbeit.',
-        tipp: 'Was treibt ihn an?' },
-      { nummer: 9,
-        text: 'Ist vor zwei Wochen beim Umdrehen rückwärts gestürzt.',
-        richtig: 'S',
-        erklaerung: 'Symptom bzw. Kennzeichen: ein konkretes Ereignis, das die Gehstörung belegt (und auf eine Sturzgefahr hinweist).',
-        tipp: 'Was ist hier konkret passiert?' },
-      { nummer: 10,
-        text: 'Nutzt seinen Rollator zuverlässig.',
-        richtig: 'R',
-        erklaerung: 'Ressource: Er hat ein Hilfsmittel und setzt es ein.',
-        tipp: 'Unterstützt ihn das?' }
-    ],
-    merksatz: 'PESR: P = Pflegeproblem als kurzer Titel · E = Einflussfaktoren/Ursachen („aufgrund von …“) – bei Parkinson oft Leitsymptome und Wirkungsschwankungen · S = Symptome/Kennzeichen, die Sie im Fall beobachten („erkennbar an …“, mit Zeilenangabe) · R = Ressourcen: Fähigkeiten, Motivation, Hilfsmittel und Menschen, die unterstützen.'
-  },
-
-  /* ========================================================================
-     KLAUSURTRAINING 2 – Pflege planen und im Notfall handeln (Di 10.11.)
-     ======================================================================== */
-
-  ab2a: {
-    ab: 'Klausurtraining 2',
-    titel: 'Übung 1: Fachgerecht gepflegt?',
-    anweisung: 'Prüfen Sie, wie Pflegefachpersonen Herrn Lenz versorgen: **R** = fachgerecht, **F** = nicht fachgerecht. Die Erklärungen liefern Ihnen die Begründungen für Aufgabe 1.',
-    knoepfe: [
-      { kuerzel: 'R', text: 'R – fachgerecht' },
-      { kuerzel: 'F', text: 'F – nicht fachgerecht' }
-    ],
-    hilfe: {
-      titel: 'Hilfe: Leitfragen',
-      punkte: [
-        'Fördert die Maßnahme seine **Selbstständigkeit** (aktivierende Pflege)?',
-        'Senkt sie das **Sturz-** oder das **Aspirationsrisiko**?',
-        'Passt sie zu den **Leitsymptomen** (Akinese, Rigor, Tremor, gestörtes Gleichgewicht)?',
-        'Berücksichtigt sie, dass **Zeitdruck und Stress** die Symptome verstärken?'
+        '**Wer?** Herr Lenz ist das Subjekt – nicht die Pflegefachperson.',
+        '**Was?** Das Ergebnis ist beobachtbar oder messbar.',
+        '**Bis wann?** Es gibt eine Zeitangabe.',
+        'Es ist **realistisch** – Parkinson ist nicht heilbar.',
+        'Kein „soll“, keine Maßnahme („erhält …“).'
       ]
     },
     mindestens: 7,
     karten: [
       { nummer: 1,
-        text: 'Herr Lenz bleibt an der Schlafzimmertür wie festgeklebt stehen. Die Pflegefachperson zieht ihn am Arm nach vorn, damit er weitergeht.',
-        richtig: 'F',
-        erklaerung: 'Nicht fachgerecht: Ziehen bringt ihn aus dem Gleichgewicht – wegen der gestörten Halte- und Stellreflexe droht ein Sturz. Besser: kurz stehen lassen, ruhig ansprechen, dann einen äußeren Reiz geben.',
-        tipp: 'Was passiert mit seinem Gleichgewicht, wenn jemand an ihm zieht?' },
+        text: 'Herr Lenz trinkt ab morgen täglich mindestens 1,5 Liter (Trinkprotokoll).',
+        richtig: 'Ü',
+        erklaerung: 'Überprüfbar: Herr Lenz als Subjekt, messbare Menge, Zeitangabe, Kontrolle über das Trinkprotokoll.',
+        tipp: 'Gehen Sie die Checkliste durch: Wer? Was? Bis wann?' },
       { nummer: 2,
-        text: 'Bei Freezing gibt die Pflegefachperson einen Rhythmus vor („eins – zwei – eins – zwei“) und lässt Herrn Lenz bewusst über die Klebemarkierung am Boden steigen.',
-        richtig: 'R',
-        erklaerung: 'Fachgerecht: Äußere Reize (Rhythmus, Linien, Musik) helfen, die Bewegung neu zu starten. Sie ersetzen die gestörte automatische Bewegungssteuerung.',
-        tipp: 'Was hat die Physiotherapeutin Herrn Lenz gezeigt?' },
+        text: 'Herr Lenz soll mehr trinken.',
+        richtig: 'N',
+        erklaerung: 'Nicht überprüfbar: „soll“ ist ein Wunsch, „mehr“ ist nicht messbar, und es fehlt die Zeitangabe.',
+        tipp: 'Wie viel ist „mehr“ – und bis wann?' },
       { nummer: 3,
-        text: 'Zum Umdrehen soll sich Herr Lenz schnell auf der Stelle drehen, damit er nicht so lange unsicher steht.',
-        richtig: 'F',
-        erklaerung: 'Nicht fachgerecht: Schnelles Drehen auf der Stelle löst Freezing und Stürze aus. Besser: in einem großen Bogen gehen und Schritt für Schritt wenden.',
-        tipp: 'Wobei ist Herr Lenz vor zwei Wochen gestürzt?' },
+        text: 'Die Pflegefachperson entfernt die losen Teppiche im Flur.',
+        richtig: 'N',
+        erklaerung: 'Das ist eine Maßnahme, kein Ziel. Ein Pflegeziel beschreibt das Ergebnis beim Pflegeempfänger.',
+        tipp: 'Wer ist hier das Subjekt?' },
       { nummer: 4,
-        text: 'In der Wohnung werden lose Teppiche und Kabel entfernt, ein Nachtlicht angebracht und Haltegriffe im Bad montiert.',
-        richtig: 'R',
-        erklaerung: 'Fachgerecht: Sturzprophylaxe – ohne Stolperfallen, mit Licht und Haltemöglichkeiten sinkt das Sturzrisiko, auch nachts auf dem Weg zur Toilette.',
-        tipp: 'Welches Risiko besteht bei Herrn Lenz besonders?' },
+        text: 'Herr Lenz überwindet das Freezing an der Türschwelle ab nächster Woche selbstständig durch Mitzählen.',
+        richtig: 'Ü',
+        erklaerung: 'Überprüfbar: beobachtbares Verhalten, Hilfsmittel/Strategie genannt, Zeitangabe.',
+        tipp: 'Kann man beobachten, ob das gelingt?' },
       { nummer: 5,
-        text: 'Körperpflege und Gehtraining plant die Pflegefachperson in die Zeit, in der die Tabletten gut wirken und Herr Lenz gut beweglich ist.',
-        richtig: 'R',
-        erklaerung: 'Fachgerecht: In der guten Phase (On-Phase) kann er mehr selbst tun – das fördert die Selbstständigkeit und senkt das Sturzrisiko. Die Beweglichkeit über den Tag beobachten und dokumentieren.',
-        tipp: 'Ist Herr Lenz den ganzen Tag gleich beweglich?' },
+        text: 'Herr Lenz wird wieder gesund und kann bald ohne Rollator gehen.',
+        richtig: 'N',
+        erklaerung: 'Nicht realistisch: Parkinson schreitet fort und ist nicht heilbar. Außerdem ist „bald“ keine Zeitangabe.',
+        tipp: 'Ist das bei Parkinson realistisch?' },
       { nummer: 6,
-        text: 'Weil das Waschen so lange dauert, übernimmt die Pflegefachperson die Körperpflege komplett.',
-        richtig: 'F',
-        erklaerung: 'Nicht fachgerecht: Aktivierende Pflege heißt, er tut alles selbst, was er kann. Zeit lassen und nicht drängen – Zeitdruck und Stress verstärken die Symptome. Nur dort unterstützen, wo es nötig ist.',
-        tipp: 'Was bedeutet aktivierende Pflege?' },
+        text: 'Herr Lenz hält sein jetziges Gewicht in den nächsten vier Wochen (wöchentliches Wiegen).',
+        richtig: 'Ü',
+        erklaerung: 'Überprüfbar: messbar (Waage), realistisch, mit Zeitraum und Kontrolle.',
+        tipp: 'Lässt sich das messen?' },
       { nummer: 7,
-        text: 'Beim Essen sitzt Herr Lenz aufrecht am Tisch, das Kinn leicht zur Brust geneigt. Er isst in Ruhe kleine Bissen.',
-        richtig: 'R',
-        erklaerung: 'Fachgerecht: Aspirationsprophylaxe – aufrechte Haltung und Kinn zur Brust schützen die Atemwege; kleine Bissen und Ruhe erleichtern das Schlucken.',
-        tipp: 'Wie schützt die Haltung beim Schlucken die Atemwege?' },
+        text: 'Herr Lenz erhält angedickte Getränke.',
+        richtig: 'N',
+        erklaerung: 'Das ist eine Maßnahme („erhält …“). Ein Ziel wäre z. B.: „Herr Lenz trinkt ab sofort ohne Verschlucken.“',
+        tipp: 'Beschreibt der Satz ein Ergebnis – oder eine Handlung?' },
       { nummer: 8,
-        text: 'Damit das Wasser besser hinunterläuft, soll Herr Lenz beim Trinken den Kopf weit in den Nacken legen.',
-        richtig: 'F',
-        erklaerung: 'Nicht fachgerecht: Mit dem Kopf im Nacken sind die Atemwege offen – Flüssigkeit gelangt leicht in die Luftröhre (Aspiration). Besser: Kopf leicht nach vorn, Getränke nach logopädischer Empfehlung andicken, Becher mit Nasenausschnitt.',
-        tipp: 'Probieren Sie es selbst: Wie schluckt es sich mit dem Kopf im Nacken?' },
+        text: 'Herr Lenz hat ab kommender Woche mindestens jeden zweiten Tag weichen Stuhlgang (Stuhlprotokoll).',
+        richtig: 'Ü',
+        erklaerung: 'Überprüfbar: Häufigkeit und Beschaffenheit sind beobachtbar, Zeitangabe und Kontrolle sind genannt.',
+        tipp: 'Wer? Was? Bis wann? Womit kontrolliert?' },
       { nummer: 9,
-        text: 'Gegen die Verstopfung achtet die Pflegefachperson darauf, dass Herr Lenz über den Tag verteilt etwa 1,5 Liter trinkt, ballaststoffreich isst und sich täglich bewegt.',
-        richtig: 'R',
-        erklaerung: 'Fachgerecht: Obstipationsprophylaxe – Flüssigkeit, Ballaststoffe und Bewegung regen den trägen Darm an. Ein Stuhlprotokoll zeigt, ob die Maßnahmen wirken.',
-        tipp: 'Was regt die Darmtätigkeit an?' },
+        text: 'Herr Lenz fühlt sich wohler.',
+        richtig: 'N',
+        erklaerung: 'Nicht überprüfbar: „wohler“ ist nicht beobachtbar oder messbar, und es fehlt die Zeitangabe.',
+        tipp: 'Woran würden Sie erkennen, dass das Ziel erreicht ist?' },
       { nummer: 10,
-        text: 'Zum Ankleiden bekommt Herr Lenz Kleidung mit Klettverschlüssen statt kleiner Knöpfe. Er zieht sich im Sitzen an.',
-        richtig: 'R',
-        erklaerung: 'Fachgerecht: Rigor und Akinese erschweren feine Bewegungen. Einfache Verschlüsse erhalten die Selbstständigkeit (Kompensation), Sitzen beugt Stürzen vor.',
-        tipp: 'Was fällt ihm wegen Rigor und Akinese schwer?' }
+        text: 'Herr Lenz wendet ab sofort bei jeder Mahlzeit die sichere Schluckhaltung an.',
+        richtig: 'Ü',
+        erklaerung: 'Überprüfbar: beobachtbares Verhalten bei jeder Mahlzeit, ab sofort.',
+        tipp: 'Kann die Pflegefachperson das bei jeder Mahlzeit beobachten?' }
     ],
-    merksatz: 'Pflege bei Parkinson: aktivierend pflegen und Zeit lassen – Stress verstärkt die Symptome. Anstrengendes in die gute Phase (On-Phase) legen. Bei Freezing nicht ziehen, sondern äußere Reize geben (Rhythmus, Markierung); in großen Bögen wenden; Stolperfallen beseitigen. Beim Essen aufrecht sitzen, Kinn zur Brust, kleine Bissen. Gegen Verstopfung: trinken, Ballaststoffe, Bewegung.'
+    merksatz: 'Ein überprüfbares Pflegeziel beschreibt das **Ergebnis** aus Sicht des Pflegeempfängers: **Wer?** (Herr Lenz) · **Was?** (beobachtbar oder messbar) · **Womit/wie?** · **Bis wann?** – realistisch, ohne „soll“ und ohne Maßnahme.'
   },
 
-  ab2b: {
-    ab: 'Klausurtraining 2',
-    titel: 'Übung 2: Akinetische Krise – was tun?',
+  /* ========================================================================
+     AB 2 – Notfall akinetische Krise (Di 10.11.)
+     ======================================================================== */
+
+  ab2a: {
+    ab: 'AB 2',
+    titel: 'Übung 1: Akinetische Krise – was tun?',
     anweisung: 'Herr Lenz befindet sich in einer akinetischen Krise. Ordnen Sie zu: **S** = Das tun Sie sofort selbstständig als Pflegefachperson · **A** = nur nach ärztlicher Anordnung · **N** = Das tun Sie nicht – es schadet.',
     knoepfe: [
       { kuerzel: 'S', text: 'S – sofort selbst' },
@@ -347,5 +281,71 @@ var INHALTE = {
         tipp: 'Welche Komplikationen drohen bei völliger Unbeweglichkeit?' }
     ],
     merksatz: 'Die akinetische Krise ist ein lebensbedrohlicher Notfall. Sofort: Ärztin informieren, Vitalzeichen und Bewusstsein überwachen, Atemwege frei halten und nichts über den Mund geben (Aspiration), Prophylaxen durchführen, Ein- und Ausfuhr bilanzieren. Medikamente und Infusionen nur nach ärztlicher Anordnung.'
+  },
+
+  ab2b: {
+    ab: 'AB 2',
+    titel: 'Für die Schnellen: Komplikationen vorbeugen',
+    anweisung: 'Herr Lenz kann sich in der akinetischen Krise nicht bewegen und nicht schlucken. Welcher Komplikation beugt die Maßnahme vor? Ordnen Sie zu.',
+    knoepfe: [
+      { kuerzel: 'P', text: 'Pneumonie' },
+      { kuerzel: 'D', text: 'Dekubitus' },
+      { kuerzel: 'T', text: 'Thrombose' },
+      { kuerzel: 'E', text: 'Exsikkose' }
+    ],
+    mindestens: 7,
+    karten: [
+      { nummer: 1,
+        text: 'Oberkörper hochlagern und Speichel absaugen.',
+        richtig: 'P',
+        erklaerung: 'Schützt vor Aspiration – Speichel, der in die Lunge gelangt, führt zur Aspirationspneumonie.',
+        tipp: 'Wohin gelangt Speichel, den er nicht schlucken kann?' },
+      { nummer: 2,
+        text: 'Fersen frei lagern und die Haut täglich auf Rötungen kontrollieren.',
+        richtig: 'D',
+        erklaerung: 'Druckentlastung und Hautinspektion: An Fersen und Kreuzbein entsteht bei Unbeweglichkeit schnell ein Dekubitus.',
+        tipp: 'Wo entsteht Druck, wenn jemand sich nicht bewegt?' },
+      { nummer: 3,
+        text: 'Regelmäßig die Position wechseln (Umlagern).',
+        richtig: ['D', 'P'],
+        erklaerung: 'Positionswechsel entlasten die Haut (Dekubitus) und verbessern die Belüftung der Lunge (Pneumonie) – beide Antworten sind richtig.',
+        tipp: 'Was wird durch einen Positionswechsel entlastet?' },
+      { nummer: 4,
+        text: 'Mehrmals täglich gründliche Mundpflege.',
+        richtig: 'P',
+        erklaerung: 'Weniger Keime im Mund – weniger Keime, die mit dem Speichel in die Lunge gelangen.',
+        tipp: 'Was passiert mit Keimen aus dem Mund, wenn er sich verschluckt?' },
+      { nummer: 5,
+        text: 'Füße kreisen lassen bzw. die Beine passiv durchbewegen.',
+        richtig: 'T',
+        erklaerung: 'Bewegung aktiviert die Muskelpumpe und hält das Blut in den Beinvenen in Fluss.',
+        tipp: 'Was passiert mit dem Blut in den Beinvenen, wenn die Muskeln nicht arbeiten?' },
+      { nummer: 6,
+        text: 'Medizinische Thromboseprophylaxestrümpfe nach Anordnung anziehen.',
+        richtig: 'T',
+        erklaerung: 'Kompression beschleunigt den venösen Rückfluss.',
+        tipp: 'Wofür sind diese Strümpfe gedacht?' },
+      { nummer: 7,
+        text: 'Ein- und Ausfuhr bilanzieren.',
+        richtig: 'E',
+        erklaerung: 'Fieber, Schwitzen und kein Trinken: Die Bilanz zeigt früh, ob Flüssigkeit fehlt.',
+        tipp: 'Was fehlt dem Körper bei Fieber, Schwitzen und ohne Trinken?' },
+      { nummer: 8,
+        text: 'Haut und Schleimhäute auf Trockenheit beobachten, stehende Hautfalten prüfen.',
+        richtig: 'E',
+        erklaerung: 'Trockene Schleimhäute und stehende Hautfalten sind Zeichen eines Flüssigkeitsmangels.',
+        tipp: 'Woran erkennen Sie, dass jemand „ausgetrocknet“ ist?' },
+      { nummer: 9,
+        text: 'Atemfrequenz und Sauerstoffsättigung kontrollieren, atemstimulierende Einreibung.',
+        richtig: 'P',
+        erklaerung: 'Atemkontrolle erkennt eine Pneumonie früh; die Einreibung fördert tiefe Atemzüge.',
+        tipp: 'Welche Komplikation betrifft die Atmung?' },
+      { nummer: 10,
+        text: 'Nichts über den Mund geben, solange er nicht sicher schlucken kann.',
+        richtig: 'P',
+        erklaerung: 'Aspirationsprophylaxe – jede Flüssigkeit im Mund kann in die Lunge gelangen.',
+        tipp: 'Was passiert, wenn er trinkt, obwohl er nicht schlucken kann?' }
+    ],
+    merksatz: 'Bei völliger Unbeweglichkeit drohen Komplikationen: **Pneumonie** – Oberkörper hoch, absaugen, Mundpflege, nichts über den Mund · **Dekubitus** – Positionswechsel, Fersen frei, Haut kontrollieren · **Thrombose** – Beine bewegen, Strümpfe nach Anordnung · **Exsikkose** – bilanzieren, Haut und Schleimhäute beobachten.'
   }
 };
