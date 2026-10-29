@@ -12,7 +12,7 @@ Papier gesichert und die SuS lernen mit dem Arbeitsblatt für Klausur und Examen
 |---|---|---|
 | Klausurtraining 1 – Krankheitsbild und Pflegeprobleme (Di 03.11.) | Übung 1: Fachlich richtig oder falsch? | `…/ab1a.html` |
 | | Übung 2: PESR-Bausteine erkennen | `…/ab1b.html` |
-| Klausurtraining 2 – Medikamente und Notfall (Di 10.11.) | Übung 1: Richtig gehandelt? | `…/ab2a.html` |
+| Klausurtraining 2 – Pflege planen und im Notfall handeln (Di 10.11.) | Übung 1: Fachgerecht gepflegt? | `…/ab2a.html` |
 | | Übung 2: Akinetische Krise – was tun? (sofort / nach Anordnung / nicht tun) | `…/ab2b.html` |
 
 ## So funktioniert eine Übung
