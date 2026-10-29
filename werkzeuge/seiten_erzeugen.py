@@ -1,0 +1,44 @@
+"""Erzeugt die acht Übungsseiten docs/ab1a.html … docs/ab4b.html aus einer Vorlage.
+Aufruf: python3 werkzeuge/seiten_erzeugen.py   (nur nötig, wenn eine Übung dazukommt)"""
+from pathlib import Path
+
+DOCS = Path(__file__).resolve().parent.parent / "docs"
+IDS = ["ab1a", "ab1b", "ab2a", "ab2b", "ab3a", "ab3b", "ab4a", "ab4b"]
+
+VORLAGE = """<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#25434B">
+<meta name="referrer" content="no-referrer">
+<title>KB I – Parkinson</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-uebung="{id}">
+<header class="kopf">
+  <p class="kopfzeile" id="kopfzeile"></p>
+  <h1 id="titel"></h1>
+</header>
+<div class="fortschritt" role="status">
+  <span id="fortschritt-text"></span>
+  <span class="fortschritt-spur" aria-hidden="true"><span class="fortschritt-balken" id="fortschritt-balken"></span></span>
+</div>
+<main class="inhalt">
+  <p class="anweisung" id="anweisung"></p>
+  <div id="hilfe-platz"></div>
+  <div id="karten"></div>
+  <div id="merksatz-bereich" hidden></div>
+  <button type="button" class="knopf knopf-zweit" id="noch-einmal"></button>
+  <p class="fuss"><a href="index.html" id="zur-uebersicht"></a></p>
+</main>
+<noscript><p class="inhalt">Bitte aktivieren Sie JavaScript, um die Übung zu bearbeiten.</p></noscript>
+<script src="inhalte.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+"""
+
+for i in IDS:
+    (DOCS / f"{i}.html").write_text(VORLAGE.replace("{id}", i), encoding="utf-8")
+print("ok:", ", ".join(IDS))
