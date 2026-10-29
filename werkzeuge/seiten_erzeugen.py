@@ -1,9 +1,9 @@
-"""Erzeugt die acht Übungsseiten docs/ab1a.html … docs/ab4b.html aus einer Vorlage.
+"""Erzeugt die Übungsseiten docs/ab1a.html … docs/ab2b.html aus einer Vorlage.
 Aufruf: python3 werkzeuge/seiten_erzeugen.py   (nur nötig, wenn eine Übung dazukommt)"""
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
-IDS = ["ab1a", "ab1b", "ab2a", "ab2b", "ab3a", "ab3b", "ab4a", "ab4b"]
+IDS = ["ab1a", "ab1b", "ab2a", "ab2b"]
 
 VORLAGE = """<!DOCTYPE html>
 <html lang="de">

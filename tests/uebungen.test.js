@@ -1,4 +1,4 @@
-/* Automatischer Test aller acht Übungen in Handygröße (Playwright, Chromium).
+/* Automatischer Test aller Übungen in Handygröße (Playwright, Chromium).
  * Aufruf (im Repository-Ordner):  node tests/uebungen.test.js
  * Prüft: falsche Antwort → Tipp und kein Merksatz; alle richtig → Merksatz erscheint;
  * „durchklicken“ wird erkannt; „Noch einmal üben“ setzt zurück; keine Konsolenfehler,
@@ -39,7 +39,7 @@ function server() {
   let ok = 0, nok = 0;
   const pruefe = (bed, text) => { if (bed) ok++; else { nok++; console.log('  ✗ ' + text); } };
 
-  for (const id of ['ab1a', 'ab1b', 'ab2a', 'ab2b', 'ab3a', 'ab3b', 'ab4a', 'ab4b']) {
+  for (const id of ['ab1a', 'ab1b', 'ab2a', 'ab2b']) {
     const U = I[id];
     await page.goto(basis + id + '.html');
     await page.evaluate(() => sessionStorage.clear());
@@ -89,7 +89,7 @@ function server() {
     await page.click('#noch-einmal');
   }
   await page.goto(basis + 'index.html');
-  pruefe(await page.locator('.ab a').count() === 8, 'Übersicht: 8 Links');
+  pruefe(await page.locator('.ab a').count() === 4, 'Übersicht: 4 Links');
   pruefe(fehler.length === 0, 'keine Konsolenfehler / fremden Anfragen: ' + fehler.join(' | '));
   await browser.close();
   s.close();

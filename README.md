@@ -1,6 +1,6 @@
-# KB I – Parkinson · digitale Übungen zu den Arbeitsblättern (3BFP3)
+# KB I – Parkinson · digitale Übungen zu den Klausurtrainings (3BFP3)
 
-Kleine Web-App zu den vier Parkinson-Arbeitsblättern im Fach KB I (generalistische Pflegeausbildung,
+Kleine Web-App zu den zwei Parkinson-Arbeitsblättern im Fach KB I (generalistische Pflegeausbildung,
 3. Ausbildungsjahr, Themenblock I). Die Schülerinnen und Schüler scannen den QR-Code auf dem Arbeitsblatt,
 bearbeiten am Smartphone eine Zuordnungsübung und erhalten sofort Rückmeldung. Sind alle Karten richtig
 gelöst, erscheint ein **Merksatz**, den sie auf das Arbeitsblatt abschreiben – so ist das Wesentliche auf
@@ -8,16 +8,12 @@ Papier gesichert und die SuS lernen mit dem Arbeitsblatt für Klausur und Examen
 
 Übersicht: https://klawittersven-arch.github.io/3BFP3_KB1_Parkinson/
 
-| AB | Übung | Adresse (QR-Code in `qr/`) |
+| Arbeitsblatt | Übung | Adresse (QR-Code in `qr/`) |
 |---|---|---|
-| 1 – Krankheitsbild prüfungsreif erläutern | Übung 1: Fachlich richtig oder falsch? (R/F) | `…/ab1a.html` |
-| | Übung 2: Physisch, psychisch oder sozial? | `…/ab1b.html` |
-| 2 – Medikamente, akinetische Krise | Übung 1: On, Off oder Dyskinesie? | `…/ab2a.html` |
+| Klausurtraining 1 – Krankheitsbild und Pflegeprobleme (Di 03.11.) | Übung 1: Fachlich richtig oder falsch? | `…/ab1a.html` |
+| | Übung 2: PESR-Bausteine erkennen | `…/ab1b.html` |
+| Klausurtraining 2 – Medikamente und Notfall (Di 10.11.) | Übung 1: Richtig gehandelt? | `…/ab2a.html` |
 | | Übung 2: Akinetische Krise – was tun? (sofort / nach Anordnung / nicht tun) | `…/ab2b.html` |
-| 3 – Pflegeprozess | Übung 1: PESR-Bausteine erkennen | `…/ab3a.html` |
-| | Übung 2: Ist das Pflegeziel überprüfbar? | `…/ab3b.html` |
-| 4 – Reha, Team, Kommunikation | Übung 1: Restitution, Kompensation oder Adaption? | `…/ab4a.html` |
-| | Übung 2: Wer übernimmt was im Team? | `…/ab4b.html` |
 
 ## So funktioniert eine Übung
 
@@ -45,7 +41,7 @@ die Änderung online.
 
 ## QR-Codes
 
-`qr/qr_ab1a.png` … `qr/qr_ab4b.png` (Fehlerkorrektur M, Ruhezone 4 Module) – bereits in die Arbeitsblätter
+`qr/qr_ab1a.png` … `qr/qr_ab2b.png` (Fehlerkorrektur M, Ruhezone 4 Module) – bereits in die Arbeitsblätter
 eingesetzt. Neu erzeugen: `python3 werkzeuge/qr_erzeugen.py` (benötigt `segno` oder `opencv-python`).
 
 Die Arbeitsblätter und Musterlösungen liegen bewusst **nicht** in diesem Repository, denn es ist öffentlich.
@@ -57,7 +53,7 @@ die Seiten erreichbar.
 
 ## Tests
 
-`node tests/uebungen.test.js` prüft alle acht Übungen in Handygröße (360 px) mit Playwright: Tipp nach falscher
+`node tests/uebungen.test.js` prüft alle Übungen in Handygröße (360 px) mit Playwright: Tipp nach falscher
 Antwort, Merksatz erst nach vollständiger Lösung, Erkennen von „Durchklicken“, Zurücksetzen, Speichern beim
 Neuladen, kein waagerechtes Scrollen, keine Konsolenfehler und keine Anfragen an fremde Adressen.
 
@@ -68,7 +64,7 @@ docs/                    ← alles, was GitHub Pages veröffentlicht
   inhalte.js             ← ALLE Texte der Übungen
   app.js, style.css      ← Programmlogik und Gestaltung
   index.html             ← Übersicht
-  ab1a.html … ab4b.html  ← die acht Übungen (erzeugt mit werkzeuge/seiten_erzeugen.py)
+  ab1a.html … ab2b.html  ← die vier Übungen (erzeugt mit werkzeuge/seiten_erzeugen.py)
   sw.js                  ← Offline-Speicher (nach größeren Änderungen VERSION erhöhen)
 qr/                      ← QR-Codes
 werkzeuge/               ← QR-Codes und Seiten erzeugen
