@@ -83,6 +83,12 @@ function fortschrittsServer() {
   /* ---------------- Teil A: Übungen ohne Fortschrittsanzeige ---------------- */
   {
     const ctx = await browser.newContext({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true });
+    // Teil A prüft die Übungen ohne Server – die eingetragene Adresse wird hier geleert.
+    await ctx.route('**/einstellungen.js', async route => {
+      const antwort = await route.fetch();
+      const text = (await antwort.text()).replace(/serverAdresse: '[^']*'/, "serverAdresse: ''");
+      await route.fulfill({ response: antwort, body: text });
+    });
     const page = await ctx.newPage();
     const fehler = [];
     beobachte(page, fehler);
@@ -154,7 +160,7 @@ function fortschrittsServer() {
     const ctx = await browser.newContext(optionen);
     await ctx.route('**/einstellungen.js', async route => {
       const antwort = await route.fetch();
-      const text = (await antwort.text()).replace("serverAdresse: ''", `serverAdresse: '${SERVER}/'`);
+      const text = (await antwort.text()).replace(/serverAdresse: '[^']*'/, `serverAdresse: '${SERVER}/'`);
       await route.fulfill({ response: antwort, body: text });
     });
     await ctx.route(SERVER + '/**', r => fs1.route(r));

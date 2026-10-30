@@ -11,7 +11,7 @@
    ========================================================================== */
 
 var EINSTELLUNGEN = {
-  serverAdresse: '',
+  serverAdresse: 'https://parkinson-fortschritt.klawittersven.workers.dev',
 
   // So oft (in Sekunden) holt die Lehrerseite den neuen Stand.
   aktualisierenSekunden: 5,
