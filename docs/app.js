@@ -71,8 +71,9 @@
     var daten = {
       raum: U.raum, uebung: id, geraet: geraetId(), name: name,
       geloest: anzahlGeloest(), gesamt: U.karten.length, erster: anzahlErsterVersuch(),
-      falsch: zustand.map(function (z, i) { return z.falsch.length ? U.karten[i].nummer : 0; })
-        .filter(function (n) { return n; })
+      // je Karte die zuerst gewählte falsche Antwort, z. B. "2-F" (für die Besprechung am Beamer)
+      falsch: zustand.map(function (z, i) { return z.falsch.length ? U.karten[i].nummer + '-' + z.falsch[0] : ''; })
+        .filter(function (x) { return x; })
     };
     var ok = function (r) { if (!r.ok) throw new Error('Status ' + r.status); };
     try {

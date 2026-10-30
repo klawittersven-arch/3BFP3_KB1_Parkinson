@@ -8,6 +8,7 @@ const RAUM = /^[a-z0-9-]{1,20}$/;
 const UEBUNG = /^[a-z0-9]{1,12}$/;
 const GERAET = /^[a-f0-9]{16,64}$/;
 const NAME = /^\p{L}[\p{L}' .-]{0,22}\p{L}\.?$/u;
+const FALSCH = /^\d{1,3}-[A-Z]{1,6}$/; // Kartennummer und zuerst gewählte falsche Antwort, z. B. "2-F"
 
 function ganzzahl(x, min, max) {
   return Number.isInteger(x) && x >= min && x <= max;
@@ -29,7 +30,7 @@ export function pruefeEintrag(d) {
     return { fehler: 'zahlen' };
   }
   const falsch = Array.isArray(d.falsch) ? d.falsch : [];
-  if (falsch.length > 50 || !falsch.every((n) => ganzzahl(n, 1, 100))) return { fehler: 'falsch' };
+  if (falsch.length > 50 || !falsch.every((x) => typeof x === 'string' && FALSCH.test(x))) return { fehler: 'falsch' };
   return {
     eintrag: {
       raum: d.raum, uebung: d.uebung, geraet: d.geraet, name,

@@ -36,6 +36,11 @@ Auf einer **Lehrerseite für den Beamer** sehen Sie live, wie weit die Klasse is
   „17 von 22 fertig“, Balken und **alle Namen mit ihrem Stand** (✓ = fertig, 6/10 = dabei, – = noch nicht begonnen).
   ⚠ heißt: fertig, aber beim ersten Versuch zu oft falsch (durchgeklickt?).
 - Darunter: **„Oft falsch beim ersten Versuch“** – die drei Karten, die Sie besprechen sollten.
+- **Besprechen:** Karte in dieser Liste antippen → sie erscheint groß auf dem Beamer, mit Aussage und Antwortknöpfen.
+  Bei den falschen Antworten steht, wie viele sie zuerst gewählt haben (ohne Namen); die Lösung bleibt verdeckt.
+  Vorschlag: „9 von Ihnen haben ‚richtig gehandelt‘ gewählt – was spricht dafür? Was dagegen?“ → **Auflösen**
+  zeigt die richtige Antwort und die Erklärung. „Nächste Karte →“ (oder Pfeiltaste), Esc schließt.
+  Höchstens zwei Karten pro Übung, direkt vor der passenden Aufgabe auf dem Arbeitsblatt.
 - Die Anzeige aktualisiert sich alle 5 Sekunden (`aktualisierenSekunden` in `docs/einstellungen.js`).
 - Einen unpassenden Namen entfernen: mit der Maus über den Namen fahren → **×**.
 - **Liste leeren (neue Stunde):** löscht alle Namen dieses Arbeitsblatts. Ohne Leeren werden die Einträge

@@ -15,6 +15,7 @@
   var status = document.getElementById('l-status');
   var fuss = document.getElementById('l-fuss');
   var letzterStand = null, timer = null, schluessel = null;
+  var fehlerJeUebung = {}; // uid → [{ nr, anzahl, wahl: {kuerzel: anzahl} }] (für die Besprechung)
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -120,18 +121,28 @@
           '<span class="l-name">' + esc(z.p.name) + '</span><span class="l-stand">' + stand + '</span>' +
           '<button type="button" class="l-weg" data-id="' + esc(z.p.id) + '" data-name="' + esc(z.p.name) + '" aria-label="' + esc(z.p.name) + ' entfernen">×</button></li>';
       }).join('');
-      // Welche Karten waren beim ersten Versuch am häufigsten falsch?
+      // Welche Karten waren beim ersten Versuch am häufigsten falsch – und welche Antwort wurde gewählt?
       var zaehler = {};
       zeilen.forEach(function (z) {
         if (!z.u || !z.u.falsch) return;
-        z.u.falsch.forEach(function (nr) { zaehler[nr] = (zaehler[nr] || 0) + 1; });
+        z.u.falsch.forEach(function (x) {
+          var teile = String(x).split('-');
+          var nr = Number(teile[0]);
+          if (!nr) return;
+          var e = zaehler[nr] = zaehler[nr] || { nr: nr, anzahl: 0, wahl: {} };
+          e.anzahl++;
+          if (teile[1]) e.wahl[teile[1]] = (e.wahl[teile[1]] || 0) + 1;
+        });
       });
-      var oft = Object.keys(zaehler).map(function (nr) { return [Number(nr), zaehler[nr]]; })
-        .sort(function (a, b) { return b[1] - a[1] || a[0] - b[0]; }).slice(0, 3);
-      var oftHtml = oft.length ? '<h3>Oft falsch beim ersten Versuch</h3><ol class="l-oft">' + oft.map(function (o) {
-        var karte = U.karten.filter(function (k) { return k.nummer === o[0]; })[0];
-        return '<li><strong>Karte ' + o[0] + ' · ' + o[1] + '×</strong> ' + esc(kurz(karte ? karte.text : '', 90)) + '</li>';
-      }).join('') + '</ol>' : '';
+      var liste = Object.keys(zaehler).map(function (nr) { return zaehler[nr]; })
+        .sort(function (a, b) { return b.anzahl - a.anzahl || a.nr - b.nr; });
+      fehlerJeUebung[uid] = liste;
+      var oftHtml = liste.length ? '<h3>Oft falsch beim ersten Versuch <span class="l-klein">– antippen zum Besprechen</span></h3><ol class="l-oft">' +
+        liste.slice(0, 3).map(function (o, i) {
+          var karte = U.karten.filter(function (k) { return k.nummer === o.nr; })[0];
+          return '<li><button type="button" class="l-oft-knopf" data-uebung="' + uid + '" data-index="' + i + '">' +
+            '<strong>Karte ' + o.nr + ' · ' + o.anzahl + '×</strong> ' + esc(kurz(karte ? karte.text : '', 90)) + '</button></li>';
+        }).join('') + '</ol>' : '';
       var proz = function (x) { return gesamt ? (100 * x / gesamt) : 0; };
       return '<section class="l-karte" data-uebung="' + uid + '">' +
         '<h2>' + esc(U.titel) + '</h2>' +
@@ -143,12 +154,92 @@
         (gesamt ? '<ul class="l-pillen">' + pillen + '</ul>' : '<p class="l-leer">Noch niemand angemeldet.</p>') +
         oftHtml + '</section>';
     }).join('');
+    Array.prototype.forEach.call(inhalt.querySelectorAll('.l-oft-knopf'), function (b) {
+      b.addEventListener('click', function () {
+        besprechen(b.getAttribute('data-uebung'), Number(b.getAttribute('data-index')));
+      });
+    });
     Array.prototype.forEach.call(inhalt.querySelectorAll('.l-weg'), function (b) {
       b.addEventListener('click', function () {
         if (!window.confirm('„' + b.getAttribute('data-name') + '“ von der Liste entfernen?')) return;
         sende('/entfernen', { id: b.getAttribute('data-id') }).then(hole, hole);
       });
     });
+  }
+
+  // ---------- Besprechen: eine Karte groß auf dem Beamer ----------
+  // Zeigt die Aussage und bei den falschen Antworten, wie viele sie zuerst gewählt haben.
+  // Die richtige Antwort bleibt verdeckt, bis „Auflösen“ geklickt wird. Keine Namen.
+  var ansicht = null;
+  function besprechen(uid, index) {
+    var liste = (fehlerJeUebung[uid] || []).slice();
+    if (!liste.length) return;
+    index = Math.max(0, Math.min(index, liste.length - 1));
+    var U = INHALTE[uid];
+    var o = liste[index];
+    var k = U.karten.filter(function (x) { return x.nummer === o.nr; })[0];
+    if (!k) return;
+    var richtige = Array.isArray(k.richtig) ? k.richtig : [k.richtig];
+    if (!ansicht) {
+      ansicht = document.createElement('div');
+      ansicht.className = 'l-besprechen';
+      ansicht.setAttribute('role', 'dialog');
+      ansicht.setAttribute('aria-modal', 'true');
+      document.body.appendChild(ansicht);
+      document.addEventListener('keydown', tasten);
+    }
+    ansicht.setAttribute('data-uebung', uid);
+    ansicht.setAttribute('data-index', index);
+    var knoepfe = U.knoepfe.map(function (b) {
+      var n = o.wahl[b.kuerzel] || 0;
+      var istRichtig = richtige.indexOf(b.kuerzel) >= 0;
+      return '<div class="l-b-antwort' + (istRichtig ? ' l-b-loesung' : '') + (n ? ' l-b-gewaehlt' : '') + '">' +
+        '<span class="l-b-text">' + esc(b.text) + '</span>' +
+        '<span class="l-b-zahl">' + (n ? n + '× zuerst gewählt' : '') + '</span></div>';
+    }).join('');
+    var gewaehlt = U.knoepfe.filter(function (b) { return o.wahl[b.kuerzel]; });
+    var frage = gewaehlt.length === 1 ? 'Was spricht für „' + gewaehlt[0].text + '“ – und was dagegen?' :
+      'Was spricht für die gewählten Antworten – und was dagegen?';
+    var erklaerung = typeof k.erklaerung === 'object' ? (k.erklaerung[richtige[0]] || '') : (k.erklaerung || '');
+    ansicht.innerHTML = '<div class="l-b-kopf"><span>' + esc(U.titel) + ' · Karte ' + o.nr + ' · beim ersten Versuch ' +
+      o.anzahl + '× falsch</span><button type="button" class="l-knopf l-zweit" id="l-b-zu">Schließen</button></div>' +
+      '<p class="l-b-aussage">' + esc(k.text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</p>' +
+      '<div class="l-b-knoepfe">' + knoepfe + '</div>' +
+      '<p class="l-b-frage">' + esc(frage) + '</p>' +
+      '<div class="l-b-erklaerung" hidden><strong>✓ Lösung:</strong> ' +
+      esc(erklaerung).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</div>' +
+      '<div class="l-b-leiste">' +
+      '<button type="button" class="l-knopf" id="l-b-auf">Auflösen</button>' +
+      (index > 0 ? '<button type="button" class="l-knopf l-zweit" id="l-b-zurueck">← Vorherige Karte</button>' : '') +
+      (index < liste.length - 1 ? '<button type="button" class="l-knopf l-zweit" id="l-b-weiter">Nächste Karte →</button>' : '') +
+      '</div>';
+    document.getElementById('l-b-zu').addEventListener('click', schliesse);
+    document.getElementById('l-b-auf').addEventListener('click', aufloesen);
+    var z = document.getElementById('l-b-zurueck'), w = document.getElementById('l-b-weiter');
+    if (z) z.addEventListener('click', function () { besprechen(uid, index - 1); });
+    if (w) w.addEventListener('click', function () { besprechen(uid, index + 1); });
+    document.getElementById('l-b-auf').focus();
+  }
+  function aufloesen() {
+    if (!ansicht) return;
+    ansicht.classList.add('l-aufgeloest');
+    ansicht.querySelector('.l-b-erklaerung').hidden = false;
+    ansicht.querySelector('.l-b-frage').hidden = true;
+    var b = document.getElementById('l-b-auf');
+    if (b) b.hidden = true;
+  }
+  function schliesse() {
+    if (!ansicht) return;
+    document.removeEventListener('keydown', tasten);
+    ansicht.parentNode.removeChild(ansicht);
+    ansicht = null;
+  }
+  function tasten(ev) {
+    if (!ansicht) return;
+    var uid = ansicht.getAttribute('data-uebung'), i = Number(ansicht.getAttribute('data-index'));
+    if (ev.key === 'Escape') schliesse();
+    else if (ev.key === 'ArrowRight' && document.getElementById('l-b-weiter')) besprechen(uid, i + 1);
+    else if (ev.key === 'ArrowLeft' && document.getElementById('l-b-zurueck')) besprechen(uid, i - 1);
   }
 
   function zeichneFuss() {

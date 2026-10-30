@@ -188,7 +188,7 @@ function fortschrittsServer() {
     await page.waitForTimeout(200);
     const letzter = fs1.posts[fs1.posts.length - 1];
     pruefe(letzter.geloest === 6 && letzter.raum === 'ab1' && letzter.uebung === 'ab1a' && letzter.gesamt === 10, 'B: Fortschritt 6/10 gesendet');
-    pruefe(JSON.stringify(letzter.falsch) === JSON.stringify([2]) && letzter.erster === 5, 'B: Fehler beim ersten Versuch (Karte 2) gesendet');
+    pruefe(JSON.stringify(letzter.falsch) === JSON.stringify(['2-' + falsch0]) && letzter.erster === 5, 'B: Fehler beim ersten Versuch (Karte 2, gewählte Antwort) gesendet: ' + JSON.stringify(letzter.falsch));
     pruefe(/^[a-f0-9]{32}$/.test(letzter.geraet), 'B: zufällige Geräte-Kennung');
     // Neu laden: kein erneutes Fragen nach dem Namen
     await page.goto(basis + 'ab1b.html');
@@ -258,6 +258,23 @@ function fortschrittsServer() {
     pruefe(await a.locator('.l-klick').count() === 1, 'C: Durchklicken (Jonas W.) wird markiert');
     const oft = await a.locator('.l-oft li').allInnerTexts();
     pruefe(oft.length === 3 && oft[0].startsWith('Karte 2 · 3×'), 'C: häufigster Fehler Karte 2: ' + oft.join(' | '));
+    // Besprechen: Karte groß anzeigen, gewählte falsche Antwort mit Anzahl, Lösung erst nach „Auflösen“
+    await a.locator('.l-oft-knopf').first().click();
+    const ansicht = page.locator('.l-besprechen');
+    pruefe(await ansicht.isVisible(), 'C: Besprechen-Ansicht öffnet sich');
+    pruefe((await ansicht.locator('.l-b-aussage').innerText()).includes('Glas Milch'), 'C: Besprechen zeigt Karte 2');
+    const gew = ansicht.locator('.l-b-gewaehlt');
+    pruefe(await gew.count() === 1 && (await gew.innerText()).includes('R – richtig gehandelt') && (await gew.innerText()).includes('3× zuerst gewählt'), 'C: gewählte falsche Antwort mit Anzahl');
+    pruefe(await ansicht.locator('.l-b-erklaerung').isHidden(), 'C: Erklärung vor dem Auflösen verborgen');
+    pruefe(!(await ansicht.innerText()).includes('Lena') && !(await ansicht.innerText()).includes('Mia'), 'C: Besprechen ohne Namen');
+    await page.screenshot({ path: path.join(__dirname, 'lehrer-besprechen.png') });
+    await page.click('#l-b-auf');
+    pruefe(await ansicht.locator('.l-b-erklaerung').isVisible() && await page.locator('.l-aufgeloest .l-b-loesung').count() === 1, 'C: Auflösen zeigt Lösung und Erklärung');
+    await page.screenshot({ path: path.join(__dirname, 'lehrer-aufgeloest.png') });
+    await page.click('#l-b-weiter');
+    pruefe((await ansicht.locator('.l-b-kopf').innerText()).includes('Karte 1'), 'C: Nächste Karte');
+    await page.keyboard.press('Escape');
+    pruefe(await page.locator('.l-besprechen').count() === 0, 'C: Besprechen schließen mit Esc');
     const b = page.locator('.l-karte[data-uebung="ab1b"]');
     pruefe(/^1 von 4 fertig/.test(await b.locator('.l-zahl').innerText()), 'C: ab1b: 1 von 4 fertig');
     pruefe(await b.locator('.l-offen').count() === 3, 'C: ab1b: 3 noch nicht begonnen');

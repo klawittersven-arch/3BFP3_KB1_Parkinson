@@ -19,7 +19,8 @@
      ab          – Arbeitsblatt (erscheint in der Kopfzeile)
      titel       – Überschrift der Übung
      anweisung   – Arbeitsanweisung über den Karten
-     knoepfe     – die Antwortknöpfe: kuerzel (intern) und text (auf dem Knopf)
+     knoepfe     – die Antwortknöpfe: kuerzel (intern, nur GROSSBUCHSTABEN, höchstens 6)
+                   und text (auf dem Knopf)
      hilfe       – (optional) aufklappbarer Hilfe-Kasten: titel + punkte
      mindestens  – so viele Karten müssen beim ERSTEN Versuch richtig sein,
                    sonst gibt es statt des Merksatzes „Nicht einfach durchklicken!“

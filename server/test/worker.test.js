@@ -30,7 +30,7 @@ const B = 'https://w.test';
 const post = (env, pfad, daten) => worker.fetch(new Request(B + pfad, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: typeof daten === 'string' ? daten : JSON.stringify(daten) }), env);
 const get = (env, pfad) => worker.fetch(new Request(B + pfad), env);
 
-const eintrag = (o = {}) => Object.assign({ raum: 'ab1', uebung: 'ab1a', geraet: 'a'.repeat(32), name: 'Lena K.', geloest: 3, gesamt: 10, erster: 2, falsch: [2, 5] }, o);
+const eintrag = (o = {}) => Object.assign({ raum: 'ab1', uebung: 'ab1a', geraet: 'a'.repeat(32), name: 'Lena K.', geloest: 3, gesamt: 10, erster: 2, falsch: ['2-R', '5-F'] }, o);
 
 const env = umgebung('geheim-123');
 
@@ -43,7 +43,7 @@ pruefe(r.status === 200, 'Startseite antwortet');
 // Fortschritt senden
 r = await post(env, '/fortschritt', eintrag());
 pruefe(r.status === 204 && r.headers.get('Access-Control-Allow-Origin') === '*', 'Fortschritt angenommen (204, CORS)');
-r = await post(env, '/fortschritt', eintrag({ geraet: 'b'.repeat(32), name: 'Tim B.', geloest: 10, erster: 9, falsch: [3] }));
+r = await post(env, '/fortschritt', eintrag({ geraet: 'b'.repeat(32), name: 'Tim B.', geloest: 10, erster: 9, falsch: ['3-R'] }));
 r = await post(env, '/fortschritt', eintrag({ geraet: 'b'.repeat(32), name: 'Tim B.', uebung: 'ab1b', geloest: 4, erster: 4, falsch: [] }));
 pruefe(r.status === 204, 'zweite Übung desselben Geräts');
 
@@ -52,7 +52,7 @@ const ungueltig = [
   ['kein JSON', 'xyz'], ['Raum', eintrag({ raum: 'AB 1' })], ['Name leer', eintrag({ name: '' })],
   ['Name mit Zeichen', eintrag({ name: '<script>' })], ['Name zu lang', eintrag({ name: 'A'.repeat(30) + ' K.' })],
   ['Gerät', eintrag({ geraet: 'xyz' })], ['geloest > gesamt', eintrag({ geloest: 11 })],
-  ['falsch-Liste', eintrag({ falsch: ['a'] })], ['zu groß', JSON.stringify(eintrag({ name: 'Lena K.', x: 'y'.repeat(5000) }))]
+  ['falsch-Liste', eintrag({ falsch: ['a'] })], ['falsch als Zahl', eintrag({ falsch: [2] })], ['falsch mit HTML', eintrag({ falsch: ['2-<b>'] })], ['zu groß', JSON.stringify(eintrag({ name: 'Lena K.', x: 'y'.repeat(5000) }))]
 ];
 for (const [t, d] of ungueltig) {
   r = await post(env, '/fortschritt', d);

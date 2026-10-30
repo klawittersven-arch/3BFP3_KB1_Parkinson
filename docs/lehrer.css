@@ -57,3 +57,25 @@ body {
 #l-form { display: flex; gap: 10px; flex-wrap: wrap; }
 #l-feld { flex: 1; min-width: 220px; min-height: 46px; padding: 8px 12px; font: inherit; border: 2px solid var(--petrol); border-radius: 10px; }
 code { background: var(--hellblau); padding: 1px 5px; border-radius: 4px; }
+.l-klein { font-weight: 400; font-size: 15px; color: #5B6B6F; }
+.l-oft-knopf { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 4px 6px; margin: 0 -6px;
+  font: inherit; color: inherit; border-radius: 8px; cursor: pointer; }
+.l-oft-knopf:hover, .l-oft-knopf:focus { background: var(--hellblau); }
+
+/* Besprechen: eine Karte groß */
+.l-besprechen { position: fixed; inset: 0; z-index: 50; background: #fff; overflow: auto; padding: 24px 6vw 40px; }
+.l-b-kopf { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 20px; color: #5B6B6F; }
+.l-b-aussage { font-size: clamp(28px, 3.2vw, 44px); line-height: 1.3; margin: 28px 0; padding: 22px 26px;
+  border: 3px solid var(--rand); border-radius: 16px; background: var(--hellblau); color: var(--text); }
+.l-b-knoepfe { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 0 0 22px; }
+.l-b-antwort { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border: 3px solid var(--petrol);
+  border-radius: 14px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 700; color: var(--dunkelpetrol); }
+.l-b-zahl { font-size: clamp(18px, 1.6vw, 22px); font-weight: 600; min-height: 1.3em; }
+.l-b-gewaehlt { background: var(--bernstein-hell); border-color: var(--bernstein); color: var(--bernstein); }
+.l-aufgeloest .l-b-loesung { background: var(--gruen-hell); border-color: var(--gruen); color: var(--gruen); }
+.l-aufgeloest .l-b-loesung .l-b-text::before { content: "✓ "; }
+.l-b-frage { font-size: clamp(22px, 2vw, 28px); font-weight: 700; color: var(--dunkelpetrol); }
+.l-b-erklaerung { font-size: clamp(22px, 2vw, 28px); line-height: 1.4; padding: 16px 20px; border-radius: 14px;
+  background: var(--gruen-hell); border-left: 8px solid var(--gruen); margin: 0 0 22px; }
+.l-b-leiste { display: flex; flex-wrap: wrap; gap: 12px; }
+.l-b-leiste .l-knopf { font-size: 22px; min-height: 56px; padding: 10px 22px; }
