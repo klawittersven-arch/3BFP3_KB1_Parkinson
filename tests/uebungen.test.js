@@ -116,6 +116,10 @@ function fortschrittsServer() {
       pruefe(await bereich.isVisible(), `${id}: Zusammenfassung sichtbar`);
       pruefe((await bereich.innerText()).includes('Das Wichtigste in Kürze'), `${id}: Zusammenfassung erscheint (bei 1 Fehler)`);
       pruefe((await bereich.innerText()).includes(U.danach.replace(/\*\*/g, '').slice(0, 25)), `${id}: Hinweis, wie es weitergeht`);
+      pruefe(await page.locator('.weiter').first().isVisible() && (await page.locator('.weiter').innerText()).includes('Übung abgeschlossen!'), `${id}: Kasten „Übung abgeschlossen!“ steht oben`);
+      const vorMerksatz = await page.evaluate(() => { const w = document.querySelector('.weiter'), m = document.querySelector('.abschluss .merksatz'); return !!(w && m && (w.compareDocumentPosition(m) & Node.DOCUMENT_POSITION_FOLLOWING)); });
+      pruefe(vorMerksatz, `${id}: Weiter-Hinweis steht vor der Zusammenfassung`);
+      pruefe(await page.locator('a[href]').count() === 0, `${id}: keine Links zu anderen Seiten`);
 
       await page.reload();
       pruefe((await page.locator('#fortschritt-text').innerText()).startsWith(`${U.karten.length} von`), `${id}: Stand nach Neuladen erhalten`);
@@ -147,7 +151,8 @@ function fortschrittsServer() {
       await page.click('#noch-einmal');
     }
     await page.goto(basis + 'index.html');
-    pruefe(await page.locator('.ab a').count() === 6, 'Übersicht: 6 Links');
+    pruefe(await page.locator('a[href]').count() === 0, 'Startseite: keine Links zu den Übungen');
+    pruefe((await page.locator('main').innerText()).includes('QR-Code'), 'Startseite: Hinweis auf den QR-Code');
     await page.goto(basis + 'lehrer-ab1.html');
     pruefe((await page.locator('#l-inhalt').innerText()).includes('Noch nicht eingerichtet'), 'Lehrerseite ohne Server: Hinweis zur Einrichtung');
     pruefe(fehler.length === 0, 'Teil A: keine Konsolenfehler / fremden Anfragen: ' + fehler.join(' | '));

@@ -14,28 +14,8 @@
   <h1>Übungen zu den Arbeitsblättern</h1>
 </header>
 <main class="inhalt">
-  <p>Scannen Sie den QR-Code auf Ihrem Arbeitsblatt – oder wählen Sie hier die Übung.</p>
-  <div id="liste"></div>
+  <p class="start-hinweis"><span aria-hidden="true">📷</span> Bitte scannen Sie den <strong>QR-Code auf Ihrem Arbeitsblatt</strong>. Er führt Sie direkt zur passenden Übung.</p>
   <p class="hinweis-klein">Keine Anmeldung, keine Cookies. Für die Fortschrittsanzeige im Unterricht werden nur Ihr Vorname mit Anfangsbuchstabe und Ihr Fortschritt übertragen und nach spätestens 12 Stunden gelöscht.</p>
 </main>
-<script src="inhalte.js"></script>
-<script>
-(function () {
-  'use strict';
-  var ABS = [
-    ['AB 1 – Therapie und Medikamente (Di 03.11.)', ['ab1a', 'ab1b', 'ab1c']],
-    ['AB 2 – Parkinson im Krankenhaus (Di 10.11.)', ['ab2a', 'ab2b', 'ab2c']]
-  ];
-  var geloest = {};
-  try { geloest = JSON.parse(localStorage.getItem('kb1-parkinson-geloest') || '{}') || {}; } catch (e) { geloest = {}; }
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-  document.getElementById('liste').innerHTML = ABS.map(function (ab) {
-    return '<section class="ab"><h2>' + esc(ab[0]) + '</h2>' + ab[1].map(function (id) {
-      return '<a href="' + id + '.html"><span>' + esc(INHALTE[id].titel) + '</span>' +
-        (geloest[id] ? '<span class="haken">✓ gelöst</span>' : '<span aria-hidden="true">→</span>') + '</a>';
-    }).join('') + '</section>';
-  }).join('');
-})();
-</script>
 </body>
 </html>

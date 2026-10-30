@@ -35,7 +35,6 @@ VORLAGE = """<!DOCTYPE html>
     <div id="merksatz-bereich" hidden></div>
     <button type="button" class="knopf knopf-zweit" id="noch-einmal"></button>
   </div>
-  <p class="fuss"><a href="index.html" id="zur-uebersicht"></a></p>
 </main>
 <noscript><p class="inhalt">Bitte aktivieren Sie JavaScript, um die Übung zu bearbeiten.</p></noscript>
 <script src="einstellungen.js"></script>

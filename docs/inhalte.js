@@ -29,7 +29,8 @@
                    (kurze Zusammenfassung „Das Wichtigste in Kürze“).
      raum        – zu welchem Arbeitsblatt die Übung gehört ('ab1' oder 'ab2');
                    danach richtet sich die Fortschrittsanzeige für den Beamer.
-     danach      – Hinweis nach dem Lösen (z. B. „Bearbeiten Sie jetzt Aufgabe 1“).
+     danach      – Hinweis nach dem Lösen: welche Aufgabe auf dem Arbeitsblatt jetzt dran ist
+                   (Titel genau wie auf dem Arbeitsblatt).
 
    Aufbau einer Karte:
      nummer      – die Nummer auf der Karte
@@ -60,7 +61,8 @@ var INHALTE = {
     durchklickenTitel: 'Hey, nicht einfach durchklicken!',
     durchklickenText: 'Beim ersten Versuch richtig: {x} von {y} – nötig sind mindestens {z}. Lesen Sie jede Karte genau und überlegen Sie, bevor Sie antworten.',
     durchklickenKnopf: 'Übung neu starten',
-    zurUebersicht: 'Zur Übersicht',
+    // Überschrift des Hinweises, der nach dem Lösen erscheint (Text je Übung unter „danach“)
+    fertigTitel: 'Übung abgeschlossen!',
 
     // Namenseingabe (nur wenn die Fortschrittsanzeige eingerichtet ist, siehe einstellungen.js)
     nameTitel: 'Wer sind Sie?',
@@ -74,7 +76,7 @@ var INHALTE = {
   },
 
   /* ========================================================================
-     AB 1 – Therapie und Medikamente aus Sicht der Pflege (Di 03.11.)
+     AB 1 – Therapie und Medikamente aus Sicht der Pflege
      ======================================================================== */
 
   ab1a: {
@@ -140,7 +142,7 @@ var INHALTE = {
         tipp: 'Bei welcher Form des Parkinson-Syndroms sind Neuroleptika der Auslöser?' }
     ],
     merksatz: 'L-Dopa richtig geben: **pünktlich** nach dem individuellen Plan · **30 Minuten vor oder 60–90 Minuten nach dem Essen mit Wasser** – Eiweiß (Milch, Quark, Fleisch) schwächt die Wirkung · **Retardtabletten nicht teilen oder mörsern** · **nie eigenmächtig weglassen** · **keine Dopamin-Gegenspieler** wie MCP oder Haloperidol – Bedenken äußern · Wirkung und Nebenwirkungen beobachten und dokumentieren.',
-    danach: 'Bearbeiten Sie jetzt **Aufgabe 1** auf Ihrem Arbeitsblatt.'
+    danach: 'Lösen Sie jetzt **„Aufgabe 1: Regeln für die Gabe von L‑Dopa“** auf dem Arbeitsblatt!'
   },
 
   ab1b: {
@@ -216,7 +218,7 @@ var INHALTE = {
         tipp: 'Wirkt die Tablette gerade zu wenig – oder sehr stark?' }
     ],
     merksatz: 'Wirkungsschwankungen: **On** = gute Beweglichkeit · **Off** = Steifigkeit, Verlangsamung, Freezing – oft vorhersehbar kurz vor der nächsten Tablette (**Wearing-off**) · **Dyskinesien** = unwillkürliche Überbewegungen bei hohem Wirkspiegel. Pflegerisch: Beweglichkeit mit Uhrzeit beobachten und dokumentieren, anstrengende Tätigkeiten in die **On-Phase** legen, Tabletten pünktlich geben, Schwankungen an die Ärztin melden.',
-    danach: 'Bearbeiten Sie jetzt **Aufgabe 2** auf Ihrem Arbeitsblatt.'
+    danach: 'Lösen Sie jetzt **„Aufgabe 2: Wirkungsschwankungen“** auf dem Arbeitsblatt!'
   },
 
   ab1c: {
@@ -263,11 +265,11 @@ var INHALTE = {
         erklaerung: 'Diagnostik: Bildgebung (CT oder MRT) schließt z. B. Tumoren oder Schlaganfälle als Ursache aus.', tipp: 'Wozu dient ein MRT?' }
     ],
     merksatz: 'Parkinson ist nicht heilbar – die Therapie lindert die Symptome. **Medikamente** (L-Dopa + Decarboxylasehemmer, Dopaminagonisten) · **aktivierende Therapien** (Physio-, Ergotherapie, Logopädie) · **invasive Verfahren** bei fortgeschrittener Erkrankung (tiefe Hirnstimulation, Medikamentenpumpen). **Diagnostik:** neurologische Untersuchung, L-Dopa-Test, Riechtest, CT/MRT zum Ausschluss anderer Ursachen.',
-    danach: 'Stark – alle Übungen zu AB 1 geschafft! Vergleichen Sie Ihre Antworten zu Aufgabe 1 und 2 mit Ihrer Nachbarin oder Ihrem Nachbarn.'
+    danach: 'Stark – Sie sind mit dem Arbeitsblatt fertig! Vergleichen Sie Ihre Antworten zu **Aufgabe 1 und 2** mit Ihrer Nachbarin oder Ihrem Nachbarn.'
   },
 
   /* ========================================================================
-     AB 2 – Parkinson im Krankenhaus: akinetische Krise (Di 10.11.)
+     AB 2 – Parkinson im Krankenhaus: akinetische Krise
      ======================================================================== */
 
   ab2a: {
@@ -342,7 +344,7 @@ var INHALTE = {
         tipp: 'Wirkt die Tablette gerade zu wenig – oder sehr stark?' }
     ],
     merksatz: '**Off-Phase:** Steifigkeit vor der nächsten Tablette – bessert sich nach der Einnahme. **Dyskinesie:** Überbewegungen bei hohem Wirkspiegel. **Akinetische Krise:** völlige Unbeweglichkeit über Stunden, Schluck- und Sprechunfähigkeit, Fieber, Herzrasen, Schwitzen, Bewusstseinsstörung – die Tabletten wirken nicht mehr. Das ist ein **lebensbedrohlicher Notfall**: sofort die Ärztin informieren.',
-    danach: 'Bearbeiten Sie jetzt **Aufgabe 1** auf Ihrem Arbeitsblatt.'
+    danach: 'Lösen Sie jetzt **„Aufgabe 1: Den Notfall erkennen“** auf dem Arbeitsblatt!'
   },
 
   ab2b: {
@@ -409,7 +411,7 @@ var INHALTE = {
         tipp: 'Welche Komplikationen drohen bei völliger Unbeweglichkeit?' }
     ],
     merksatz: 'Akinetische Krise – lebensbedrohlicher Notfall. **Sofort selbstständig:** Ärztin informieren, Vitalzeichen und Bewusstsein überwachen, Oberkörper hoch, Speichel absaugen, nichts über den Mund geben (Aspiration), Prophylaxen, Ein- und Ausfuhr bilanzieren. **Nach ärztlicher Anordnung:** z. B. Amantadin-Infusion, L-Dopa über Magensonde, Infusionen. **Nicht:** trinken lassen, Tabletten über den Mund, Dopamin-Gegenspieler wie MCP oder Haloperidol.',
-    danach: 'Bearbeiten Sie jetzt **Aufgabe 2** auf Ihrem Arbeitsblatt.'
+    danach: 'Lösen Sie jetzt **„Aufgabe 2: Pflegerische Sofortmaßnahmen“** auf dem Arbeitsblatt!'
   },
 
   ab2c: {
@@ -455,6 +457,6 @@ var INHALTE = {
         erklaerung: 'Risikofaktor: Schmerzen und Unsicherheit nach der Operation. Schmerzmanagement und begleitetes Aufstehen senken das Risiko.', tipp: 'Macht das das Gehen sicherer oder unsicherer?' }
     ],
     merksatz: 'Risiko-Pflegeproblem: **P** = Sturzgefahr · **RF** = Risikofaktoren aus dem Fall – in der Person (Freezing, Off-Phasen, kleinschrittiger Gang, früherer Sturz, Schmerzen nach der OP) und in der Umgebung (fremde Umgebung, dunkle Wege) · **R** = Ressourcen. Interventionen begründen Sie mit den Risikofaktoren – z. B. Mobilisation in der **On-Phase**, etwa eine Stunde nach der Tablette.',
-    danach: 'Bearbeiten Sie jetzt **Aufgabe 3** („Für die Schnellen“) auf Ihrem Arbeitsblatt.'
+    danach: 'Lösen Sie jetzt **„Aufgabe 3 (für die Schnellen): Risiko-Pflegeproblem Sturzgefahr“** auf dem Arbeitsblatt!'
   }
 };

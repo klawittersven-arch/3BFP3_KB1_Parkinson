@@ -6,14 +6,16 @@ bearbeiten am Smartphone eine Zuordnungsübung und erhalten sofort Rückmeldung.
 Begründungen für die folgende schriftliche Aufgabe auf dem Arbeitsblatt – so sparen die SuS Schreib- und Denkzeit.
 Auf einer **Lehrerseite für den Beamer** sehen Sie live, wie weit die Klasse ist.
 
-Übersicht: https://klawittersven-arch.github.io/3BFP3_KB1_Parkinson/
+Die SuS gelangen **nur über die QR-Codes** zu den Übungen. Jede Übungsseite zeigt nur diese eine Übung – ohne Links zu
+anderen Übungen oder einer Übersicht. Die Startseite (https://klawittersven-arch.github.io/3BFP3_KB1_Parkinson/) sagt nur:
+„Bitte scannen Sie den QR-Code auf Ihrem Arbeitsblatt.“
 
 | Arbeitsblatt | Übung | Adresse (QR-Code in `qr/`) |
 |---|---|---|
-| AB 1 – Therapie und Medikamente (Di 03.11.) | Übung 1: L-Dopa – richtig gegeben? (R / F) → Aufgabe 1 | `…/ab1a.html` |
+| AB 1 – Therapie und Medikamente | Übung 1: L-Dopa – richtig gegeben? (R / F) → Aufgabe 1 | `…/ab1a.html` |
 | | Übung 2: On, Off oder Dyskinesie? → Aufgabe 2 | `…/ab1b.html` |
 | | Für die Schnellen: Therapie-Check (Medikament / aktivierend / invasiv / Diagnostik) | `…/ab1c.html` |
-| AB 2 – Parkinson im Krankenhaus (Di 10.11.) | Übung 1: Off-Phase oder Notfall? → Aufgabe 1 | `…/ab2a.html` |
+| AB 2 – Parkinson im Krankenhaus | Übung 1: Off-Phase oder Notfall? → Aufgabe 1 | `…/ab2a.html` |
 | | Übung 2: Akinetische Krise – was tun? (sofort / nach Anordnung / nicht tun) → Aufgabe 2 | `…/ab2b.html` |
 | | Für die Schnellen: Sturzgefahr sortieren (P / RF / R / anderes Problem) → Aufgabe 3 | `…/ab2c.html` |
 
@@ -25,8 +27,9 @@ Auf einer **Lehrerseite für den Beamer** sehen Sie live, wie weit die Klasse is
   wird automatisch „Lena K.“). Das Handy merkt sich den Namen für alle Übungen; „ändern“ ist jederzeit möglich.
 - Karten mit Aussagen, darunter die Antwortknöpfe. **Richtig:** grün mit ✓ und Erklärung.
   **Falsch:** orange mit ✗ und Tipp – die Lösung wird nie verraten, ein neuer Versuch ist möglich.
-- Erst wenn alle Karten gelöst sind, erscheint „Das Wichtigste in Kürze“ und der Hinweis, welche Aufgabe auf dem
-  Arbeitsblatt jetzt dran ist. Wer einfach durchklickt (zu wenige Karten beim ersten Versuch richtig, Wert
+- Erst wenn alle Karten gelöst sind, erscheint oben ein grüner Kasten **„Übung abgeschlossen! Lösen Sie jetzt „Aufgabe 1: …“
+  auf dem Arbeitsblatt!“** (Text je Übung unter `danach` in `docs/inhalte.js`, Titel genau wie auf dem Arbeitsblatt),
+  darunter „Das Wichtigste in Kürze“. Wer einfach durchklickt (zu wenige Karten beim ersten Versuch richtig, Wert
   `mindestens` je Übung), bekommt stattdessen „Hey, nicht einfach durchklicken!“.
 - „Noch einmal üben“ setzt die Übung zurück. Ein versehentliches Neuladen löscht nichts.
 
@@ -109,7 +112,7 @@ docs/                    ← alles, was GitHub Pages veröffentlicht
   einstellungen.js       ← Adresse des Workers, Aktualisierungstakt, Sperrwörter für Namen
   app.js, style.css      ← Übungen (Handy)
   lehrer.js, lehrer.css  ← Lehrerseiten (Beamer)
-  index.html             ← Übersicht
+  index.html             ← Startseite (nur Hinweis auf den QR-Code, keine Liste)
   ab1a.html … ab2c.html  ← die sechs Übungen   (erzeugt mit werkzeuge/seiten_erzeugen.py)
   lehrer-ab1.html, lehrer-ab2.html             (ebenfalls erzeugt)
   sw.js                  ← Offline-Speicher (nach größeren Änderungen VERSION erhöhen)

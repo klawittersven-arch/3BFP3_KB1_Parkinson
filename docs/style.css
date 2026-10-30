@@ -100,6 +100,8 @@ a { color: var(--petrol); }
 .rueckmeldung.falsch .rm-kopf { color: var(--bernstein); }
 
 /* ---------- Merksatz / Durchklicken ---------- */
+.abschluss { margin: 24px 0 18px; scroll-margin-top: 60px; }
+.abschluss .merksatz { margin: 14px 0 0; }
 .merksatz, .durchklicken {
   margin: 24px 0 18px; padding: 16px; border-radius: 12px; scroll-margin-top: 60px;
 }
@@ -127,6 +129,7 @@ a { color: var(--petrol); }
 .ab a:first-of-type { border-top: 0; }
 .haken { color: var(--gruen); font-weight: 700; white-space: nowrap; }
 .hinweis-klein { font-size: 15px; color: #3D5257; }
+.start-hinweis { font-size: 20px; padding: 16px; border-radius: 12px; background: var(--hellblau); border: 2px solid var(--petrol); }
 
 /* ---------- Name für die Fortschrittsanzeige ---------- */
 .name-bereich { background: var(--hellblau); border: 2px solid var(--petrol); border-radius: 12px; padding: 16px; margin: 4px 0 18px; }
@@ -140,4 +143,8 @@ a { color: var(--petrol); }
 .name-zeile { margin: 0 0 8px; font-size: 15px; color: #3D5257; }
 .link-knopf { border: 0; background: none; padding: 4px 2px; font: inherit; color: var(--petrol); text-decoration: underline; cursor: pointer; min-height: 32px; }
 .unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.danach { margin: 0; padding: 10px 12px; border-radius: 8px; background: var(--gruen-hell); color: var(--gruen); font-weight: 700; }
+/* Hinweis nach dem Lösen: welche Aufgabe auf dem Arbeitsblatt jetzt dran ist */
+.weiter { padding: 16px; border-radius: 12px; background: var(--gruen-hell); border: 4px solid var(--gruen); color: var(--text); }
+.weiter-titel { margin: 0 0 6px; font-size: 22px; font-weight: 800; color: var(--gruen); }
+.weiter-text { margin: 0; font-size: 19px; font-weight: 600; line-height: 1.4; }
+.weiter-text strong { color: var(--dunkelpetrol); }

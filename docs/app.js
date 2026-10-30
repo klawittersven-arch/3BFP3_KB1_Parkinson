@@ -104,7 +104,6 @@
   var nameBereich = document.getElementById('name-bereich');
   var nameZeile = document.getElementById('name-zeile');
   var uebungTeil = document.getElementById('uebung-teil');
-  document.getElementById('zur-uebersicht').textContent = A.zurUebersicht;
 
   if (U.hilfe) {
     var d = document.createElement('details');
@@ -207,11 +206,13 @@
         '<button type="button" class="knopf" id="neu-start">' + esc(A.durchklickenKnopf) + '</button>';
       document.getElementById('neu-start').addEventListener('click', zuruecksetzen);
     } else {
-      bereich.className = 'merksatz';
-      bereich.innerHTML = '<h2><span aria-hidden="true">📝</span> ' + esc(A.merksatzUeberschrift) + '</h2>' +
+      bereich.className = 'abschluss';
+      bereich.innerHTML =
+        '<div class="weiter" role="status"><p class="weiter-titel"><span aria-hidden="true">✓</span> ' + esc(A.fertigTitel) + '</p>' +
+        (U.danach ? '<p class="weiter-text">' + fmt(U.danach) + '</p>' : '') + '</div>' +
+        '<div class="merksatz"><h2><span aria-hidden="true">📝</span> ' + esc(A.merksatzUeberschrift) + '</h2>' +
         '<p class="merksatz-text">' + fmt(U.merksatz) + '</p>' +
-        '<p class="erster-versuch">' + esc(ersetze(A.ersterVersuch, { x: erster, y: n })) + '</p>' +
-        (U.danach ? '<p class="danach">' + fmt(U.danach) + '</p>' : '');
+        '<p class="erster-versuch">' + esc(ersetze(A.ersterVersuch, { x: erster, y: n })) + '</p></div>';
       var l = lokal();
       if (l) {
         var geloest = lade(GELOEST, l) || {};
