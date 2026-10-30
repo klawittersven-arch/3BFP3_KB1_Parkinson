@@ -1,9 +1,10 @@
-"""Erzeugt die Übungsseiten docs/ab1a.html … docs/ab2b.html aus einer Vorlage.
+"""Erzeugt die Übungsseiten docs/ab1a.html … docs/ab2c.html und die Lehrerseiten aus Vorlagen.
 Aufruf: python3 werkzeuge/seiten_erzeugen.py   (nur nötig, wenn eine Übung dazukommt)"""
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
-IDS = ["ab1a", "ab1b", "ab2a", "ab2b"]
+IDS = ["ab1a", "ab1b", "ab1c", "ab2a", "ab2b", "ab2c"]
+RAEUME = {"ab1": "AB 1 – Therapie und Medikamente", "ab2": "AB 2 – Parkinson im Krankenhaus"}
 
 VORLAGE = """<!DOCTYPE html>
 <html lang="de">
@@ -25,20 +26,51 @@ VORLAGE = """<!DOCTYPE html>
   <span class="fortschritt-spur" aria-hidden="true"><span class="fortschritt-balken" id="fortschritt-balken"></span></span>
 </div>
 <main class="inhalt">
-  <p class="anweisung" id="anweisung"></p>
-  <div id="hilfe-platz"></div>
-  <div id="karten"></div>
-  <div id="merksatz-bereich" hidden></div>
-  <button type="button" class="knopf knopf-zweit" id="noch-einmal"></button>
+  <div id="name-bereich" class="name-bereich" hidden></div>
+  <div id="uebung-teil">
+    <p class="name-zeile" id="name-zeile" hidden></p>
+    <p class="anweisung" id="anweisung"></p>
+    <div id="hilfe-platz"></div>
+    <div id="karten"></div>
+    <div id="merksatz-bereich" hidden></div>
+    <button type="button" class="knopf knopf-zweit" id="noch-einmal"></button>
+  </div>
   <p class="fuss"><a href="index.html" id="zur-uebersicht"></a></p>
 </main>
 <noscript><p class="inhalt">Bitte aktivieren Sie JavaScript, um die Übung zu bearbeiten.</p></noscript>
+<script src="einstellungen.js"></script>
 <script src="inhalte.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
 """
 
+LEHRER = """<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>{titel} · Fortschritt</title>
+<link rel="stylesheet" href="lehrer.css">
+</head>
+<body data-raum="{raum}">
+<header class="l-kopf">
+  <h1>{titel}</h1>
+  <p id="l-status" class="l-status" role="status"></p>
+</header>
+<main id="l-inhalt" class="l-inhalt"></main>
+<footer class="l-fuss" id="l-fuss"></footer>
+<script src="einstellungen.js"></script>
+<script src="inhalte.js"></script>
+<script src="lehrer.js"></script>
+</body>
+</html>
+"""
+
 for i in IDS:
     (DOCS / f"{i}.html").write_text(VORLAGE.replace("{id}", i), encoding="utf-8")
-print("ok:", ", ".join(IDS))
+for raum, titel in RAEUME.items():
+    (DOCS / f"lehrer-{raum}.html").write_text(LEHRER.replace("{raum}", raum).replace("{titel}", titel), encoding="utf-8")
+print("ok:", ", ".join(IDS), "+ Lehrerseiten", ", ".join(RAEUME))

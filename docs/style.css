@@ -127,3 +127,17 @@ a { color: var(--petrol); }
 .ab a:first-of-type { border-top: 0; }
 .haken { color: var(--gruen); font-weight: 700; white-space: nowrap; }
 .hinweis-klein { font-size: 15px; color: #3D5257; }
+
+/* ---------- Name für die Fortschrittsanzeige ---------- */
+.name-bereich { background: var(--hellblau); border: 2px solid var(--petrol); border-radius: 12px; padding: 16px; margin: 4px 0 18px; }
+.name-bereich h2 { margin: 0 0 8px; font-size: 21px; color: var(--dunkelpetrol); }
+.name-bereich input {
+  display: block; width: 100%; min-height: 52px; margin: 8px 0 10px; padding: 10px 12px;
+  border: 2px solid var(--petrol); border-radius: 10px; font: inherit; font-size: 20px; background: #fff; color: var(--text);
+}
+.name-bereich .knopf { width: 100%; }
+.name-fehler { margin: 0 0 10px; padding: 8px 10px; border-radius: 8px; background: var(--bernstein-hell); color: var(--bernstein); font-weight: 600; }
+.name-zeile { margin: 0 0 8px; font-size: 15px; color: #3D5257; }
+.link-knopf { border: 0; background: none; padding: 4px 2px; font: inherit; color: var(--petrol); text-decoration: underline; cursor: pointer; min-height: 32px; }
+.unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.danach { margin: 0; padding: 10px 12px; border-radius: 8px; background: var(--gruen-hell); color: var(--gruen); font-weight: 700; }

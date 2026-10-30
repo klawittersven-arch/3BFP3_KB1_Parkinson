@@ -4,10 +4,14 @@
   'use strict';
 
   var A = INHALTE.allgemein;
+  var E = window.EINSTELLUNGEN || {};
   var id = document.body.getAttribute('data-uebung');
   var U = INHALTE[id];
   var SPEICHER = 'kb1-parkinson-' + id;
   var GELOEST = 'kb1-parkinson-geloest';
+  var NAME = 'kb1-parkinson-name';
+  var GERAET = 'kb1-parkinson-geraet';
+  var SERVER = String(E.serverAdresse || '').replace(/\/+$/, '');
 
   // ---------- Hilfsfunktionen ----------
   function esc(s) {
@@ -32,6 +36,57 @@
   }
   function lokal() { try { return window.localStorage; } catch (e) { return null; } }
 
+  // ---------- Name und Fortschrittsanzeige ----------
+  // Name: „Vorname X.“ – nur nötig, wenn in einstellungen.js eine serverAdresse steht.
+  function normalisiereName(roh) {
+    var t = String(roh || '').replace(/\s+/g, ' ').trim();
+    var m = t.match(/^(.+) (\S)[^ ]*$/); // „Lena Kraus“ wird zu „Lena K.“
+    if (!m) return null;
+    var vor = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+    var name = vor + ' ' + m[2].toUpperCase() + '.';
+    if (name.length > 24 || !/^\p{L}[\p{L}' -]*\p{L} \p{L}\.$/u.test(name)) return null;
+    var flach = name.toLowerCase().replace(/[^\p{L}]/gu, '');
+    var sperr = (E.sperrwoerter || []).some(function (w) { return flach.indexOf(w) >= 0; });
+    return sperr ? null : name;
+  }
+  function geraetId() {
+    var l = lokal(), g = null;
+    try { g = l && l.getItem(GERAET); } catch (e) { g = null; }
+    if (g && /^[a-f0-9]{16,64}$/.test(g)) return g;
+    var b = new Uint8Array(16);
+    try { window.crypto.getRandomValues(b); } catch (e) { for (var i = 0; i < 16; i++) b[i] = Math.floor(Math.random() * 256); }
+    g = Array.prototype.map.call(b, function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
+    try { if (l) l.setItem(GERAET, g); } catch (e) { /* egal */ }
+    return g;
+  }
+  function gespeicherterName() {
+    var l = lokal();
+    try { return l ? normalisiereName(l.getItem(NAME)) : null; } catch (e) { return null; }
+  }
+  var name = SERVER ? gespeicherterName() : null;
+  var wiederholung = null;
+
+  function sende() {
+    if (!SERVER || !name || !U.raum) return;
+    var daten = {
+      raum: U.raum, uebung: id, geraet: geraetId(), name: name,
+      geloest: anzahlGeloest(), gesamt: U.karten.length, erster: anzahlErsterVersuch(),
+      falsch: zustand.map(function (z, i) { return z.falsch.length ? U.karten[i].nummer : 0; })
+        .filter(function (n) { return n; })
+    };
+    var ok = function (r) { if (!r.ok) throw new Error('Status ' + r.status); };
+    try {
+      fetch(SERVER + '/fortschritt', {
+        method: 'POST', headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(daten), keepalive: true
+      }).then(ok).catch(spaeter);
+    } catch (e) { spaeter(); }
+  }
+  function spaeter() { // ohne Verbindung: in 10 s noch einmal den aktuellen Stand senden
+    if (wiederholung) return;
+    wiederholung = setTimeout(function () { wiederholung = null; sende(); }, 10000);
+  }
+
   // ---------- Zustand ----------
   function leererZustand() {
     return U.karten.map(function () { return { geloest: false, falsch: [], gewaehlt: null }; });
@@ -45,6 +100,9 @@
   document.getElementById('titel').textContent = U.titel;
   document.getElementById('anweisung').innerHTML = fmt(U.anweisung);
   document.getElementById('noch-einmal').textContent = A.nochEinmal;
+  var nameBereich = document.getElementById('name-bereich');
+  var nameZeile = document.getElementById('name-zeile');
+  var uebungTeil = document.getElementById('uebung-teil');
   document.getElementById('zur-uebersicht').textContent = A.zurUebersicht;
 
   if (U.hilfe) {
@@ -96,6 +154,7 @@
     speichere(SPEICHER, zustand);
     zeichneKarte(i, true);
     aktualisiere(true);
+    sende();
   }
 
   function zeichneKarte(i, frisch) {
@@ -148,16 +207,10 @@
       document.getElementById('neu-start').addEventListener('click', zuruecksetzen);
     } else {
       bereich.className = 'merksatz';
-      var weiter = '';
-      if (/a$/.test(id) && INHALTE[id.replace(/a$/, 'b')]) {
-        weiter = '<a class="knopf" href="' + id.replace(/a$/, 'b') + '.html">' + esc(A.naechsteUebung) + ' →</a>';
-      } else {
-        weiter = '<a class="knopf" href="index.html">' + esc(A.zurUebersicht) + '</a>';
-      }
       bereich.innerHTML = '<h2><span aria-hidden="true">📝</span> ' + esc(A.merksatzUeberschrift) + '</h2>' +
         '<p class="merksatz-text">' + fmt(U.merksatz) + '</p>' +
-        '<p class="merksatz-hinweis">' + esc(A.merksatzHinweis) + '</p>' +
-        '<p class="erster-versuch">' + esc(ersetze(A.ersterVersuch, { x: erster, y: n })) + '</p>' + weiter;
+        '<p class="erster-versuch">' + esc(ersetze(A.ersterVersuch, { x: erster, y: n })) + '</p>' +
+        (U.danach ? '<p class="danach">' + fmt(U.danach) + '</p>' : '');
       var l = lokal();
       if (l) {
         var geloest = lade(GELOEST, l) || {};
@@ -183,6 +236,7 @@
     }
     kartenEl.forEach(function (el, i) { zeichneKarte(i, false); });
     aktualisiere(false);
+    sende();
     window.scrollTo(0, 0);
   }
 
@@ -190,6 +244,43 @@
 
   kartenEl.forEach(function (el, i) { zeichneKarte(i, false); });
   aktualisiere(false);
+
+  // ---------- Namenseingabe ----------
+  function zeigeName() {
+    nameZeile.hidden = false;
+    nameZeile.innerHTML = esc(ersetze(A.nameAnzeige, { x: name })) +
+      ' · <button type="button" class="link-knopf" id="name-aendern">' + esc(A.nameAendern) + '</button>';
+    document.getElementById('name-aendern').addEventListener('click', frageName);
+  }
+  function frageName() {
+    uebungTeil.hidden = true;
+    nameZeile.hidden = true;
+    nameBereich.hidden = false;
+    nameBereich.innerHTML = '<h2>' + esc(A.nameTitel) + '</h2><p>' + fmt(A.nameText) + '</p>' +
+      '<form id="name-form" novalidate><label for="name-feld" class="unsichtbar">Name</label>' +
+      '<input id="name-feld" type="text" autocomplete="off" autocapitalize="words" spellcheck="false" maxlength="30" placeholder="' + esc(A.nameBeispiel) + '" value="' + esc(name || '') + '">' +
+      '<p class="name-fehler" id="name-fehler" role="alert" hidden></p>' +
+      '<button type="submit" class="knopf">' + esc(A.nameKnopf) + '</button></form>' +
+      '<p class="hinweis-klein">' + esc(A.nameDatenschutz) + '</p>';
+    var feld = document.getElementById('name-feld');
+    document.getElementById('name-form').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var n = normalisiereName(feld.value);
+      var f = document.getElementById('name-fehler');
+      if (!n) { f.textContent = A.nameFehler; f.hidden = false; feld.focus(); return; }
+      name = n;
+      var l = lokal();
+      try { if (l) l.setItem(NAME, n); } catch (e) { /* egal */ }
+      nameBereich.hidden = true;
+      nameBereich.innerHTML = '';
+      uebungTeil.hidden = false;
+      zeigeName();
+      sende();
+    });
+  }
+  if (SERVER) {
+    if (name) { zeigeName(); sende(); } else { frageName(); }
+  }
 
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     navigator.serviceWorker.register('sw.js').catch(function () { /* egal */ });

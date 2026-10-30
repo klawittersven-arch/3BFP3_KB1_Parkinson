@@ -3,11 +3,11 @@
  * sonst die gespeicherte Fassung – Textänderungen kommen so sofort an.
  * Nach größeren Änderungen VERSION erhöhen ('v2', 'v3' …). */
 'use strict';
-var VERSION = 'v4';
+var VERSION = 'v5';
 var CACHE = 'kb1-parkinson-' + VERSION;
 var ZEITLIMIT_MS = 4000;
-var DATEIEN = ['./', 'index.html', 'inhalte.js', 'app.js', 'style.css',
-  'ab1a.html', 'ab1b.html', 'ab2a.html', 'ab2b.html'];
+var DATEIEN = ['./', 'index.html', 'inhalte.js', 'einstellungen.js', 'app.js', 'style.css',
+  'ab1a.html', 'ab1b.html', 'ab1c.html', 'ab2a.html', 'ab2b.html', 'ab2c.html'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) {

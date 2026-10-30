@@ -14,17 +14,17 @@
   <h1>Übungen zu den Arbeitsblättern</h1>
 </header>
 <main class="inhalt">
-  <p>Scannen Sie den QR-Code auf Ihrem Arbeitsblatt – oder wählen Sie hier die Übung. Den <strong>Merksatz</strong> am Ende jeder Übung schreiben Sie auf Ihr Arbeitsblatt.</p>
+  <p>Scannen Sie den QR-Code auf Ihrem Arbeitsblatt – oder wählen Sie hier die Übung.</p>
   <div id="liste"></div>
-  <p class="hinweis-klein">Keine Anmeldung, keine Cookies: Ihr Lernstand bleibt nur auf diesem Gerät.</p>
+  <p class="hinweis-klein">Keine Anmeldung, keine Cookies. Für die Fortschrittsanzeige im Unterricht werden nur Ihr Vorname mit Anfangsbuchstabe und Ihr Fortschritt übertragen und nach spätestens 12 Stunden gelöscht.</p>
 </main>
 <script src="inhalte.js"></script>
 <script>
 (function () {
   'use strict';
   var ABS = [
-    ['AB 1 – Pflegeprobleme und Pflegeziele (Di 03.11.)', ['ab1a', 'ab1b']],
-    ['AB 2 – Notfall akinetische Krise (Di 10.11.)', ['ab2a', 'ab2b']]
+    ['AB 1 – Therapie und Medikamente (Di 03.11.)', ['ab1a', 'ab1b', 'ab1c']],
+    ['AB 2 – Parkinson im Krankenhaus (Di 10.11.)', ['ab2a', 'ab2b', 'ab2c']]
   ];
   var geloest = {};
   try { geloest = JSON.parse(localStorage.getItem('kb1-parkinson-geloest') || '{}') || {}; } catch (e) { geloest = {}; }
